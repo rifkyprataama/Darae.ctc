@@ -1,1 +1,21 @@
 @import "tailwindcss";
+
+html {
+    scroll-behavior: smooth; /* Membuat gerakan meluncur halus */
+    scroll-padding-top: 100px; /* Memberi jarak agar judul tidak ketutupan Navbar */
+}
+
+/* Kustomisasi Scrollbar agar tidak abu-abu membosankan */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #000; 
+}
+::-webkit-scrollbar-thumb {
+    background: #333; 
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}

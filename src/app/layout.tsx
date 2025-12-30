@@ -5,8 +5,11 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Darae.ctc | Digital Creative Agency",
-  description: "Web Development & Graphic Design Services",
+  title: "Darae.ctc | Jasa Web & Desain Grafis Profesional",
+  description: "Solusi digital all-in-one: Pembuatan Website, Aplikasi Mobile, Video Editing, dan Branding Identity. Konsultasi Gratis sekarang.",
+  icons: {
+    icon: '/favicon.ico', // Kita akan siapkan ini di langkah B
+  }
 };
 
 export default function RootLayout({
