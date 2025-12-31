@@ -6,14 +6,14 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 export default function Home() {
-    return (
-      <main className="min-h-screen bg-black text-white selection:bg-purple-500 selection:text-white">
-        <Navbar />
-        <Hero />
-        <Services />
-        <Portfolio />
-        <Contact />
-        <Footer />
-      </main>
-    );
+  return (
+    <main className="min-h-screen selection:bg-purple-500 selection:text-white">
+      <Navbar />
+      <Hero />
+      <Services />
+      <Portfolio />
+      <Contact />
+      <Footer />
+    </main>
+  );
 }
