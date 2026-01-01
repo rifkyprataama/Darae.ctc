@@ -17,43 +17,36 @@ body {
 
 /* Lebar Scrollbar */
 ::-webkit-scrollbar {
-  width: 14px; /* Sedikit lebar untuk memberi ruang border (efek melayang) */
+  width: 14px; 
 }
 
 /* TRACK (Jalur Scrollbar) */
 ::-webkit-scrollbar-track {
-  background: transparent; /* Dibuat transparan agar bersih */
+  background: transparent; 
 }
 
 /* THUMB (Batang Scrollbar) - DEFAULT (LIGHT MODE) */
 ::-webkit-scrollbar-thumb {
-  /* Warna: Abu-abu dari palette Darae dengan transparansi */
   @apply bg-darae-grey/40; 
-  
-  /* Trik CSS untuk membuat efek "Floating" (Melayang) */
   border: 4px solid transparent; 
   background-clip: content-box;
-  
-  /* Bentuk: Sangat Bulat */
   border-radius: 9999px; 
 }
 
 /* Saat Mouse Menyentuh Scrollbar (HOVER) */
 ::-webkit-scrollbar-thumb:hover {
-  /* Warna: Berubah jadi Terracotta (Accent) */
   @apply bg-darae-accent; 
-  
-  /* Sedikit memperbesar batang saat dihover */
   border: 3px solid transparent; 
 }
 
 /* 3. KHUSUS DARK MODE */
 .dark ::-webkit-scrollbar-thumb {
-  /* Warna: Putih transparan agar kontras dengan biru tua */
   @apply bg-white/20; 
 }
 
-/* Hover di Dark Mode tetap Terracotta agar konsisten */
 .dark ::-webkit-scrollbar-thumb:hover {
   @apply bg-darae-accent; 
 }
+
+/* BAGIAN PENGHILANG KURSOR SUDAH DIHAPUS DI SINI */
+/* Sekarang panah mouse asli akan terlihat + bola hitam mengikutinya */

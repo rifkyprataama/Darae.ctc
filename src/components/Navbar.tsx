@@ -2,47 +2,50 @@
 import { useState } from 'react'
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
+import Magnetic from "./ui/Magnetic"; // <--- 1. IMPORT KOMPONEN MAGNETIC
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    // 1. UPDATE CONTAINER STYLE:
-    // - Background: Warna Darae Light/Dark dengan opacity 90% (Solid tapi transparan dikit)
-    // - Blur: Sm (Halus, tidak blur berlebihan seperti kaca)
-    // - Border: Abu tipis transparan
     <nav className="fixed top-0 w-full p-6 flex justify-between items-center z-50 transition-colors duration-300 bg-darae-light/90 dark:bg-darae-dark/90 backdrop-blur-sm border-b border-darae-grey/10">
       
-      {/* 2. LOGO BARU: Gaya Minimalis & Solid */}
-      {/* Light: Charcoal | Dark: White | Aksen: Terracotta (.ctc) */}
+      {/* LOGO (Biasanya logo tidak dimagnet, jadi biarkan saja) */}
       <Link href="/" className="text-2xl font-bold tracking-tighter text-darae-charcoal dark:text-white relative z-50 transition-colors">
         Darae<span className="text-darae-accent">.ctc</span>
       </Link>
 
-      {/* 3. MENU DESKTOP */}
+      {/* MENU DESKTOP */}
       <div className="hidden md:flex items-center space-x-6 text-sm font-medium text-darae-grey dark:text-gray-300">
-        <a href="#services" className="hover:text-darae-accent transition">
-          Layanan
-        </a>
-        <a href="#portfolio" className="hover:text-darae-accent transition">
-          Portfolio
-        </a>
         
-        {/* Toggle Theme */}
+        {/* 2. BUNGKUS LINK DENGAN MAGNETIC */}
+        <Magnetic>
+            <a href="#services" className="hover:text-darae-accent transition block p-4"> {/* Tambahkan padding agar area magnet lebih luas */}
+            Layanan
+            </a>
+        </Magnetic>
+
+        <Magnetic>
+            <a href="#portfolio" className="hover:text-darae-accent transition block p-4">
+            Portfolio
+            </a>
+        </Magnetic>
+        
+        {/* Theme Toggle biarkan statis atau bungkus juga kalau mau */}
         <div className="scale-90">
             <ThemeToggle />
         </div>
 
-        {/* 4. TOMBOL KONTAK: Gaya 'Super Rounded' */}
-        {/* Light: Hitam Arang | Dark: Putih */}
-        <a href="#contact" className="bg-darae-charcoal text-white dark:bg-white dark:text-darae-charcoal px-6 py-2 rounded-[2rem] hover:opacity-80 transition font-bold shadow-lg shadow-darae-charcoal/10">
-          Kontak Kami
-        </a>
+        {/* 3. TOMBOL KONTAK JUGA DIMAGNET AGAR KEREN */}
+        <Magnetic>
+            <a href="#contact" className="bg-darae-charcoal text-white dark:bg-white dark:text-darae-charcoal px-6 py-2 rounded-[2rem] hover:opacity-80 transition font-bold shadow-lg shadow-darae-charcoal/10 inline-block">
+            Kontak Kami
+            </a>
+        </Magnetic>
       </div>
 
-      {/* 5. TOMBOL HAMBURGER (MOBILE) */}
+      {/* TOMBOL HAMBURGER (MOBILE) */}
       <div className="md:hidden z-50 flex items-center gap-4">
-        
         <div className="scale-75">
              <ThemeToggle />
         </div>
@@ -62,7 +65,7 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* 6. MENU MOBILE OVERLAY */}
+      {/* MENU MOBILE OVERLAY */}
       {isOpen && (
         <div className="absolute top-0 left-0 w-full h-screen bg-darae-light dark:bg-darae-dark flex flex-col items-center justify-center space-y-8 md:hidden z-40 animate-fadeIn">
            <a

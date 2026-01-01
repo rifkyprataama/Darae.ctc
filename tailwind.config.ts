@@ -13,10 +13,10 @@ const config: Config = {
         // PALETTE DARAE.CTC
         darae: {
           light: '#F3F4F3',      // Background Light (Off-white)
-          dark: '#2E455A',       // Background Dark (Deep Blue/Night)
-          charcoal: '#2C2F32',   // Teks Utama (Dark Charcoal)
-          accent: '#A8625B',     // Tombol/Highlight (Terracotta)
-          grey: '#8E8887',       // Border/Secondary Text
+          dark: '#1f2327',       // Background Dark (Deep Blue/Night)
+          charcoal: '#1f2327',   // Teks Utama (Dark Charcoal)
+          accent: '#aa0f21',     // Tombol/Highlight (Terracotta)
+          grey: '#aa0f21',       // Border/Secondary Text
           softBlue: '#ADC1C8',   // Gradasi 1
           paleYellow: '#F0D9AD', // Gradasi 2
         }
@@ -25,6 +25,9 @@ const config: Config = {
         // KITA BUAT GRADIENT MESH DISINI
         'mesh-light': "radial-gradient(at 0% 0%, #ADC1C8 0px, transparent 50%), radial-gradient(at 100% 0%, #F0D9AD 0px, transparent 50%)",
         'mesh-dark': "radial-gradient(at 0% 0%, #1a2a3a 0px, transparent 50%), radial-gradient(at 100% 0%, #2E455A 0px, transparent 50%)",
+      },
+      animation: {
+        'spin-slow': 'spin 12s linear infinite', // Putaran sangat pelan (12 detik)
       },
     },
   },

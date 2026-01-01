@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import StickyCursor from "@/components/ui/StickyCursor";
+import FloatingContact from "@/components/FloatingContact";
+import { CursorProvider } from "@/context/CursorContext"; 
+// import SmoothScroll dihapus agar tidak membebani website
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -9,7 +13,7 @@ export const metadata: Metadata = {
   title: "Darae.ctc | Jasa Web & Desain Grafis Profesional",
   description: "Solusi digital all-in-one: Pembuatan Website, Aplikasi Mobile, Video Editing, dan Branding Identity. Konsultasi Gratis sekarang.",
   icons: {
-    icon: '/favicon.ico', // Kita akan siapkan ini di langkah B
+    icon: '/favicon.ico', 
   }
 };
 
@@ -31,7 +35,17 @@ export default function RootLayout({
               enableSystem
               disableTransitionOnChange
             >
-              {children}
+              {/* Kita tetap bungkus dengan CursorProvider agar kursor bola tetap jalan */}
+              <CursorProvider>
+                  
+                  <StickyCursor />
+                  
+                  {children}
+                  
+                  <FloatingContact />
+                  
+              </CursorProvider>
+
           </ThemeProvider>
         </body>
       </html>
