@@ -20,8 +20,11 @@ export default function RootLayout({
   }>) {
     return (
       <html lang="en" suppressHydrationWarning>
-        <body className={`${inter.className} bg-white text-gray-900 dark:bg-black dark:text-white`}>
-          {/* 2. BUNGKUS CHILDREN DENGAN THEME PROVIDER */}
+        <body 
+          className={`${inter.className} 
+            bg-darae-light text-darae-charcoal 
+            dark:bg-darae-dark dark:text-darae-light`}
+        >
           <ThemeProvider
               attribute="class"
               defaultTheme="system"
@@ -29,7 +32,7 @@ export default function RootLayout({
               disableTransitionOnChange
             >
               {children}
-            </ThemeProvider>
+          </ThemeProvider>
         </body>
       </html>
     );

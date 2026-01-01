@@ -19,9 +19,9 @@ export default function ThemeToggle() {
       type="button"
       className="
         relative w-16 h-8 rounded-full p-1 transition-colors duration-300 focus:outline-none 
-        border border-gray-200 dark:border-zinc-700
-        /* WARNA WADAH (CONTAINER): */
-        bg-gray-100 dark:bg-zinc-800
+        border border-darae-grey/20 dark:border-white/10
+        /* WARNA WADAH: Sesuaikan dengan palette */
+        bg-white dark:bg-black/30
       "
     >
       {/* ---------------------------------------------------------------

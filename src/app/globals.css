@@ -2,33 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 1. SETUP HALAMAN */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
 }
 
-/* Scrollbar Style tetap pertahankan */
+body {
+  /* Memastikan transisi warna background halus saat ganti tema */
+  @apply transition-colors duration-300;
+}
+
+/* 2. KUSTOMISASI SCROLLBAR (PREMIUM LOOK) */
+
+/* Lebar Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 14px; /* Sedikit lebar untuk memberi ruang border (efek melayang) */
 }
+
+/* TRACK (Jalur Scrollbar) */
 ::-webkit-scrollbar-track {
-  background: #f3f4f6;
+  background: transparent; /* Dibuat transparan agar bersih */
 }
-.dark ::-webkit-scrollbar-track {
-  background: #09090b;
-}
+
+/* THUMB (Batang Scrollbar) - DEFAULT (LIGHT MODE) */
 ::-webkit-scrollbar-thumb {
-  background: #9ca3af;
-  border-radius: 99px;
-  border: 2px solid transparent;
+  /* Warna: Abu-abu dari palette Darae dengan transparansi */
+  @apply bg-darae-grey/40; 
+  
+  /* Trik CSS untuk membuat efek "Floating" (Melayang) */
+  border: 4px solid transparent; 
   background-clip: content-box;
+  
+  /* Bentuk: Sangat Bulat */
+  border-radius: 9999px; 
 }
-.dark ::-webkit-scrollbar-thumb {
-  background: #3f3f46;
-}
+
+/* Saat Mouse Menyentuh Scrollbar (HOVER) */
 ::-webkit-scrollbar-thumb:hover {
-  background: #6b7280;
+  /* Warna: Berubah jadi Terracotta (Accent) */
+  @apply bg-darae-accent; 
+  
+  /* Sedikit memperbesar batang saat dihover */
+  border: 3px solid transparent; 
 }
+
+/* 3. KHUSUS DARK MODE */
+.dark ::-webkit-scrollbar-thumb {
+  /* Warna: Putih transparan agar kontras dengan biru tua */
+  @apply bg-white/20; 
+}
+
+/* Hover di Dark Mode tetap Terracotta agar konsisten */
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: #52525b;
+  @apply bg-darae-accent; 
 }
