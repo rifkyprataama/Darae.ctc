@@ -7,8 +7,8 @@ export default function StickyCursor() {
   const { isHovered } = useCursor();
 
   // UKURAN:
-  // - Default: 10px (Kecil seperti titik pulpen)
-  // - Hover: 30px (Membesar sedikit)
+  // - Default: 10px (Kecil)
+  // - Hover: 30px (Besar)
   const cursorSize = isHovered ? 30 : 10; 
   
   const mouse = {
@@ -16,8 +16,6 @@ export default function StickyCursor() {
     y: useMotionValue(0)
   }
 
-  // FISIKA GERAKAN:
-  // Mass 0.5 membuat gerakan agak 'telat' dan smooth seperti Cuberto
   const smoothOptions = { damping: 20, stiffness: 300, mass: 0.5 }
   
   const smoothMouse = {
@@ -49,14 +47,19 @@ export default function StickyCursor() {
         height: cursorSize
       }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="
+      className={`
         fixed pointer-events-none z-[9999] rounded-full
         
-        /* KUNCI PERBAIKAN: */
-        /* Gunakan 'bg-white' SAJA (Jangan diubah jadi black saat light mode) */
-        /* mix-blend-difference akan otomatis membuatnya jadi Hitam di background Terang */
-        bg-white mix-blend-difference
-      "
+        ${isHovered 
+            // STATE 1: INTERAKTIF (Tombol/Link)
+            // Pakai Mix-Blend-Difference (Efek Inversi Warna Keren)
+            ? 'bg-white mix-blend-difference' 
+            
+            // STATE 2: TEKS BIASA (Judul/Paragraf)
+            // Pakai Solid Color (Hitam/Putih) agar warna teks asli TIDAK berubah (misal: Merah tetap Merah)
+            : 'bg-black dark:bg-white'
+        }
+      `}
     />
   )
 }

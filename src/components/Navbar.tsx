@@ -1,44 +1,82 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react' // Import useEffect
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
-import Magnetic from "./ui/Magnetic"; // <--- 1. IMPORT KOMPONEN MAGNETIC
+import Magnetic from "./ui/Magnetic";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  
+  // --- LOGIKA SCROLL (HIDE/SHOW) ---
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Jika scroll ke BAWAH lebih dari 50px, sembunyikan Navbar
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        setIsVisible(false);
+      } else {
+        // Jika scroll ke ATAS, munculkan Navbar
+        setIsVisible(true);
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+  // ----------------------------------
 
   return (
-    <nav className="fixed top-0 w-full p-6 flex justify-between items-center z-50 transition-colors duration-300 bg-darae-light/90 dark:bg-darae-dark/90 backdrop-blur-sm border-b border-darae-grey/10">
+    <nav 
+        className={`
+            fixed top-0 w-full p-6 flex justify-between items-center z-50 
+            transition-all duration-500 ease-in-out border-b border-transparent
+            
+            /* KELAS UNTUK HILANG/MUNCUL */
+            ${isVisible ? 'translate-y-0' : '-translate-y-full'} 
+            
+            /* EFEK BACKGROUND: Transparan di paling atas, Blur saat di-scroll */
+            ${lastScrollY > 20 ? 'bg-darae-light/90 dark:bg-darae-dark/90 backdrop-blur-md border-darae-grey/10' : 'bg-transparent'}
+        `}
+    >
       
-      {/* LOGO (Biasanya logo tidak dimagnet, jadi biarkan saja) */}
+      {/* LOGO */}
       <Link href="/" className="text-2xl font-bold tracking-tighter text-darae-charcoal dark:text-white relative z-50 transition-colors">
         Darae<span className="text-darae-accent">.ctc</span>
       </Link>
 
       {/* MENU DESKTOP */}
-      <div className="hidden md:flex items-center space-x-6 text-sm font-medium text-darae-grey dark:text-gray-300">
+      <div className="hidden md:flex items-center space-x-6 text-sm font-medium text-darae-charcoal dark:text-white">
         
-        {/* 2. BUNGKUS LINK DENGAN MAGNETIC */}
+        {/* Link 1: Layanan */}
         <Magnetic>
-            <a href="#services" className="hover:text-darae-accent transition block p-4"> {/* Tambahkan padding agar area magnet lebih luas */}
+            <a href="#services" className="transition-colors block p-4"> 
             Layanan
             </a>
         </Magnetic>
 
+        {/* Link 2: Portfolio */}
         <Magnetic>
-            <a href="#portfolio" className="hover:text-darae-accent transition block p-4">
+            <a href="#portfolio" className="transition-colors block p-4">
             Portfolio
             </a>
         </Magnetic>
         
-        {/* Theme Toggle biarkan statis atau bungkus juga kalau mau */}
-        <div className="scale-90">
-            <ThemeToggle />
-        </div>
-
-        {/* 3. TOMBOL KONTAK JUGA DIMAGNET AGAR KEREN */}
+        {/* ICON TEMA (BARU) */}
+        {/* Dibungkus Magnetic agar ada efek magnet saat didekati */}
         <Magnetic>
-            <a href="#contact" className="bg-darae-charcoal text-white dark:bg-white dark:text-darae-charcoal px-6 py-2 rounded-[2rem] hover:opacity-80 transition font-bold shadow-lg shadow-darae-charcoal/10 inline-block">
+            <div className="flex items-center justify-center">
+                <ThemeToggle />
+            </div>
+        </Magnetic>
+
+        {/* Tombol Kontak */}
+        <Magnetic>
+            <a href="#contact" className="bg-darae-charcoal text-white dark:bg-white dark:text-darae-charcoal px-6 py-2 rounded-[2rem] hover:scale-105 transition-transform font-bold shadow-lg shadow-darae-charcoal/10 inline-block">
             Kontak Kami
             </a>
         </Magnetic>
@@ -46,9 +84,8 @@ export default function Navbar() {
 
       {/* TOMBOL HAMBURGER (MOBILE) */}
       <div className="md:hidden z-50 flex items-center gap-4">
-        <div className="scale-75">
-             <ThemeToggle />
-        </div>
+        {/* Toggle juga ada di Mobile */}
+        <ThemeToggle />
 
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -70,21 +107,21 @@ export default function Navbar() {
         <div className="absolute top-0 left-0 w-full h-screen bg-darae-light dark:bg-darae-dark flex flex-col items-center justify-center space-y-8 md:hidden z-40 animate-fadeIn">
            <a
              href="#services"
-             className="text-2xl font-bold text-darae-charcoal dark:text-white hover:text-darae-accent transition"
+             className="text-2xl font-bold text-darae-charcoal dark:text-white transition-transform hover:scale-110"
              onClick={() => setIsOpen(false)}
            >
              Layanan
            </a>
            <a
              href="#portfolio"
-             className="text-2xl font-bold text-darae-charcoal dark:text-white hover:text-darae-accent transition"
+             className="text-2xl font-bold text-darae-charcoal dark:text-white transition-transform hover:scale-110"
              onClick={() => setIsOpen(false)}
            >
              Portfolio
            </a>
            <a
              href="#contact"
-             className="text-2xl font-bold bg-darae-charcoal text-white dark:bg-white dark:text-darae-charcoal px-8 py-3 rounded-[2rem] hover:opacity-80 transition shadow-xl"
+             className="text-2xl font-bold bg-darae-charcoal text-white dark:bg-white dark:text-darae-charcoal px-8 py-3 rounded-[2rem] hover:scale-105 transition-transform shadow-xl"
              onClick={() => setIsOpen(false)}
            >
              Kontak Kami

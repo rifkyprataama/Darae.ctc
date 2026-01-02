@@ -1,12 +1,16 @@
 'use client'
+import Magnetic from "./ui/Magnetic"; // Import Magnetic
+
+// ... (Bagian const services biarkan sama) ...
 
 const services = [
+  // ... data services Anda ...
   {
     title: "Web Development",
     price: "Mulai Rp 1.5jt",
     description: "Website landing page responsif, cepat, dan SEO friendly.",
     features: ["Domain & Hosting Gratis", "Desain Premium", "Revisi Minor 3x", "Koneksi WhatsApp"],
-    color: "bg-blue-100 text-blue-600" // Aksen icon
+    color: "bg-blue-100 text-blue-600" 
   },
   {
     title: "Social Media Design",
@@ -39,9 +43,6 @@ export default function Services() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {services.map((item, index) => (
-            // CARD STYLE: 
-            // - Light: Putih, Shadow Halus
-            // - Dark: Putih transparan (Glassy dark), Border tipis
             <div key={index} className="p-10 rounded-[2.5rem] bg-white border border-darae-grey/10 shadow-xl shadow-darae-grey/5 dark:bg-white/5 dark:border-white/10 hover:-translate-y-2 transition duration-300 flex flex-col">
               
               <h3 className="text-2xl font-bold mb-2 text-darae-charcoal dark:text-white">{item.title}</h3>
@@ -61,9 +62,12 @@ export default function Services() {
                 ))}
               </ul>
 
-              <a href="#contact" className="w-full py-4 rounded-[2rem] bg-darae-light border border-darae-grey/20 text-darae-charcoal font-bold hover:bg-darae-accent hover:text-white hover:border-darae-accent transition text-center dark:bg-white/10 dark:text-white dark:hover:bg-darae-accent">
-                Pilih Paket
-              </a>
+              {/* BUNGKUS TOMBOL DENGAN MAGNETIC */}
+              <Magnetic>
+                  <a href="#contact" className="w-full inline-block py-4 rounded-[2rem] bg-darae-light border border-darae-grey/20 text-darae-charcoal font-bold hover:bg-darae-accent hover:text-white hover:border-darae-accent transition text-center dark:bg-white/10 dark:text-white dark:hover:bg-darae-accent">
+                    Pilih Paket
+                  </a>
+              </Magnetic>
             </div>
           ))}
         </div>

@@ -10,24 +10,26 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // PALETTE DARAE.CTC
+        // PALETTE DARAE.CTC (UPDATED: CUBERTO STYLE)
         darae: {
-          light: '#F3F4F3',      // Background Light (Off-white)
-          dark: '#1f2327',       // Background Dark (Deep Blue/Night)
-          charcoal: '#1f2327',   // Teks Utama (Dark Charcoal)
-          accent: '#aa0f21',     // Tombol/Highlight (Terracotta)
-          grey: '#aa0f21',       // Border/Secondary Text
-          softBlue: '#ADC1C8',   // Gradasi 1
-          paleYellow: '#F0D9AD', // Gradasi 2
+          light: '#FFFFFF',    // GANTI: Pure White (Putih Bersih)
+          dark: '#000000',     // GANTI: Pure Black (Hitam Pekat)
+          charcoal: '#000000', // GANTI: Pure Black (Teks Utama di Light Mode)
+          accent: '#aa0f21',   // TETAP: Terracotta (Sesuai branding Anda)
+          grey: '#888888',     // PERBAIKAN: Sebelumnya merah (#aa0f21), saya ubah jadi Abu-abu asli
+          
+          // Warna gradasi (bisa dihapus jika ingin 100% clean, tapi dibiarkan dulu tidak masalah)
+          // softBlue: '#ADC1C8', 
+          // paleYellow: '#F0D9AD', 
         }
       },
       backgroundImage: {
-        // KITA BUAT GRADIENT MESH DISINI
-        'mesh-light': "radial-gradient(at 0% 0%, #ADC1C8 0px, transparent 50%), radial-gradient(at 100% 0%, #F0D9AD 0px, transparent 50%)",
-        'mesh-dark': "radial-gradient(at 0% 0%, #1a2a3a 0px, transparent 50%), radial-gradient(at 100% 0%, #2E455A 0px, transparent 50%)",
+        // Gradient Mesh disesuaikan agar lebih halus/subtle di background hitam/putih
+        // 'mesh-light': "radial-gradient(at 0% 0%, #ADC1C8 0px, transparent 50%), radial-gradient(at 100% 0%, #F0D9AD 0px, transparent 50%)",
+        // 'mesh-dark': "radial-gradient(at 0% 0%, #111111 0px, transparent 50%), radial-gradient(at 100% 0%, #222222 0px, transparent 50%)",
       },
       animation: {
-        'spin-slow': 'spin 12s linear infinite', // Putaran sangat pelan (12 detik)
+        'spin-slow': 'spin 12s linear infinite', 
       },
     },
   },
