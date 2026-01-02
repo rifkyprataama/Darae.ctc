@@ -5,7 +5,6 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import StickyCursor from "@/components/ui/StickyCursor";
 import FloatingContact from "@/components/FloatingContact";
 import { CursorProvider } from "@/context/CursorContext"; 
-// import SmoothScroll dihapus agar tidak membebani website
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,7 +34,7 @@ export default function RootLayout({
               enableSystem
               disableTransitionOnChange
             >
-              {/* Kita tetap bungkus dengan CursorProvider agar kursor bola tetap jalan */}
+              {/* Context Provider untuk Kursor */}
               <CursorProvider>
                   
                   <StickyCursor />
