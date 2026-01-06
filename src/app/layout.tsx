@@ -12,7 +12,9 @@ export const metadata: Metadata = {
   title: "Darae.ctc | Jasa Web & Desain Grafis Profesional",
   description: "Solusi digital all-in-one: Pembuatan Website, Aplikasi Mobile, Video Editing, dan Branding Identity. Konsultasi Gratis sekarang.",
   icons: {
-    icon: '/favicon.ico', 
+    icon: '/icon.svg',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
   }
 };
 

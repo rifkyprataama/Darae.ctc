@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react' // Import useEffect
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import Magnetic from "./ui/Magnetic";
+import Image from "next/image";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,8 +46,33 @@ export default function Navbar() {
     >
       
       {/* LOGO */}
-      <Link href="/" className="text-2xl font-bold tracking-tighter text-darae-charcoal dark:text-white relative z-50 transition-colors">
-        Darae<span className="text-darae-accent">.ctc</span>
+      <Link href="/" className="relative z-50 transition-opacity hover:opacity-70">
+        
+        {/* Container untuk Logo */}
+        {/* Atur 'w-32' atau 'w-40' sesuai lebar logo Anda */}
+        <div className="relative h-10 w-40"> 
+            
+            {/* LOGO UNTUK LIGHT MODE (Warna Gelap) */}
+            {/* Muncul di Light (block), Sembunyi di Dark (dark:hidden) */}
+            <Image 
+                src="/logo-light.png"  
+                alt="Darae Logo"
+                fill
+                className="object-contain object-left block dark:hidden"
+                priority
+            />
+
+            {/* LOGO UNTUK DARK MODE (Warna Terang) */}
+            {/* Sembunyi di Light (hidden), Muncul di Dark (dark:block) */}
+            <Image 
+                src="/logo-dark.png" 
+                alt="Darae Logo Dark"
+                fill
+                className="object-contain object-left hidden dark:block"
+                priority
+            />
+        </div>
+
       </Link>
 
       {/* MENU DESKTOP */}
@@ -62,7 +88,7 @@ export default function Navbar() {
         {/* Link 2: Portfolio */}
         <Magnetic>
             <a href="#portfolio" className="transition-colors block p-4">
-            Portfolio
+            Portofolio
             </a>
         </Magnetic>
         
@@ -117,7 +143,7 @@ export default function Navbar() {
              className="text-2xl font-bold text-darae-charcoal dark:text-white transition-transform hover:scale-110"
              onClick={() => setIsOpen(false)}
            >
-             Portfolio
+             Portofolio
            </a>
            <a
              href="#contact"

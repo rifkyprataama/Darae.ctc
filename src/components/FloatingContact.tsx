@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function FloatingContact() {
   // --- KONFIGURASI WHATSAPP ---
-  const phoneNumber = "6281234567890"; // Ganti dengan nomor WA Anda (Format: 62...)
+  const phoneNumber = "6281234567890"; 
   const message = "Halo Darae.ctc, saya tertarik untuk diskusi project website/desain."; 
   
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
@@ -13,32 +13,37 @@ export default function FloatingContact() {
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      // HAPUS class 'hidden md:block' agar tombol ini MUNCUL DI HP juga
       className="fixed bottom-6 right-6 z-[9999] group cursor-pointer"
     >
-      {/* Container Ukuran: Disesuaikan agar pas di Mobile (w-24) & Desktop (w-32) */}
+      {/* Container Ukuran */}
       <div className="relative w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
         
         {/* LINGKARAN BERPUTAR (TEKS) */}
-        {/* Menggunakan animasi 'animate-spin-slow' dari Tailwind config Anda */}
         <div className="absolute inset-0 w-full h-full animate-spin-slow">
             <svg viewBox="0 0 100 100" width="100%" height="100%">
               <defs>
-                <path id="circle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
+                <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
               </defs>
-              <text fontSize="11.5">
-                {/* Teks dimodifikasi sedikit agar relevan dengan WA */}
-                <textPath xlinkHref="#circle" className="text-darae-charcoal dark:text-white fill-current font-bold uppercase tracking-widest">
-                  hubungi kami • start a project •
+              
+              <text>
+                {/* PERBAIKAN GAP/CELAH:
+                   - Pola kalimat diubah menjadi " - CONTACT" (spasi strip spasi CONTACT).
+                   - Dengan menaruh spasi di awal kalimat, kita memastikan ada jarak saat putaran berakhir dan bertemu kembali ke awal.
+                */}
+                <textPath 
+                    href="#circlePath" 
+                    textLength="232.5"
+                    lengthAdjust="spacing"
+                    className="text-[8.5px] fill-current text-darae-charcoal dark:text-white font-bold uppercase"
+                >
+                   - CONTACT -- CONTACT -- CONTACT -
                 </textPath>
               </text>
             </svg>
         </div>
 
         {/* ICON TENGAH (DIAM/STATIS) */}
-        {/* Saat hover: Background jadi Hijau WA & Membesar sedikit */}
         <div className="w-12 h-12 md:w-14 md:h-14 bg-darae-charcoal dark:bg-white rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-[#25D366] group-hover:scale-110 shadow-lg">
-           
            {/* LOGO WHATSAPP SVG */}
            <svg 
              className="w-6 h-6 md:w-7 md:h-7 text-white dark:text-black group-hover:text-white transition-colors" 
