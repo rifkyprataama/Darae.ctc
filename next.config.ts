@@ -1,7 +1,23 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    // Izin untuk merender SVG
+    dangerouslyAllowSVG: true,
+    // Keamanan tambahan untuk SVG
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.simpleicons.org',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

@@ -9,8 +9,8 @@ import { CursorProvider } from "@/context/CursorContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Darae.ctc | Jasa Web & Desain Grafis Profesional",
-  description: "Solusi digital all-in-one: Pembuatan Website, Aplikasi Mobile, Video Editing, dan Branding Identity. Konsultasi Gratis sekarang.",
+  title: "Darae | Jasa IT & Digital Creative",
+  description: "Solusi digital all-in-one: Pembuatan Website, Aplikasi Mobile, Video Editing, dan Desain Grafis. Konsultasi Gratis sekarang.",
   icons: {
     icon: '/icon.svg',
     shortcut: '/icon.png',

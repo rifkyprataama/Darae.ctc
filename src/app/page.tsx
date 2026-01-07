@@ -1,19 +1,35 @@
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import Services from "@/components/Services";
+import HomeSection from "@/components/HomeSection";
+import About from "@/components/About";
+import Pricing from "@/components/Pricing";
 import Portofolio from "@/components/Portofolio";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import FloatingContact from "@/components/FloatingContact";
 
 export default function Home() {
   return (
     <main className="min-h-screen selection:bg-purple-500 selection:text-white">
       <Navbar />
-      <Hero />
-      <Services />
-      <Portofolio />
-      <Contact />
+
+      <div id="home">
+        <HomeSection />
+      </div>
+
+      <About />
+
+      <Pricing />
+
+      <div id="portfolio">
+        <Portofolio />
+      </div>
+
+      <div id="contact">
+        <Contact />
+      </div>
+
       <Footer />
+      <FloatingContact />
     </main>
   );
 }

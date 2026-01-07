@@ -1,15 +1,16 @@
 'use client';
 import { useEffect } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { useCursor } from '@/context/CursorContext';
+import { useCursor } from '@/context/CursorContext'; // Import kembali Context
 
 export default function StickyCursor() {
   const { isHovered } = useCursor();
 
-  // UKURAN:
-  // - Default: 10px (Kecil)
-  // - Hover: 30px (Besar)
-  const cursorSize = isHovered ? 30 : 10; 
+  // UKURAN DINAMIS (KEMBALI KE SEBELUMNYA):
+  // - Biasa: 10px (Titik kecil)
+  // - Hover: 40px (Lingkaran agak besar agar teks muat di dalamnya)
+  // Saya besarkan sedikit dari 30 ke 40 agar teks "Konsultasi Gratis" lebih enak dilihat
+  const cursorSize = isHovered ? 40 : 10; 
   
   const mouse = {
     x: useMotionValue(0),
@@ -48,16 +49,20 @@ export default function StickyCursor() {
       }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className={`
-        fixed pointer-events-none z-[9999] rounded-full
+        fixed pointer-events-none z-[9999] rounded-full flex items-center justify-center
+        transition-colors duration-200
         
         ${isHovered 
-            // STATE 1: INTERAKTIF (Tombol/Link)
-            // Pakai Mix-Blend-Difference (Efek Inversi Warna Keren)
-            ? 'bg-white mix-blend-difference' 
+            // STATE HOVER (DI ATAS TOMBOL):
+            // - Background: Hampir transparan (hitam tipis 5%)
+            // - Border: Ada border tipis agar lingkaran terlihat
+            // - Backdrop Filter: Blur sedikit untuk efek kaca (opsional)
+            ? 'bg-black/5 dark:bg-white/10 border border-black/50 dark:border-white/50 backdrop-blur-[1px]' 
             
-            // STATE 2: TEKS BIASA (Judul/Paragraf)
-            // Pakai Solid Color (Hitam/Putih) agar warna teks asli TIDAK berubah (misal: Merah tetap Merah)
-            : 'bg-black dark:bg-white'
+            // STATE NORMAL (DI LUAR TOMBOL):
+            // - Solid Hitam/Putih (Titik kecil)
+            // - Tanpa Border
+            : 'bg-black dark:bg-white border-none'
         }
       `}
     />
