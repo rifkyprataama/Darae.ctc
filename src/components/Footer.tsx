@@ -19,40 +19,22 @@ export default function Footer() {
                Punya ide liar? Kami siap membantu menerjemahkannya menjadi realitas digital yang fungsional dan estetik.
              </p>
              
-             <div className="flex flex-wrap gap-4">
-                 <Magnetic>
-                    <a 
-                    href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20diskusi%20project" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block px-8 py-4 bg-darae-charcoal text-white dark:bg-white dark:text-black rounded-full font-bold hover:scale-105 transition-transform shadow-xl"
-                    >
-                    Start a Project
-                    </a>
-                 </Magnetic>
-                 
-                 <Magnetic>
-                    <a 
-                    href="mailto:hello@darae.ctc" 
-                    className="inline-block px-8 py-4 bg-transparent border border-gray-300 dark:border-white/20 rounded-full font-bold hover:bg-gray-50 dark:hover:bg-white/10 transition-colors"
-                    >
-                    hello@darae.ctc
-                    </a>
-                 </Magnetic>
+             <div className="flex flex-col gap-2">
+                <a href="mailto:hello@darae.ctc" className="text-2xl font-bold hover:text-darae-accent transition-colors">hello@darae.ctc</a>
+                <p className="text-darae-grey dark:text-gray-500">+62 812 3456 7890</p>
              </div>
           </div>
 
-          {/* BAGIAN KANAN */}
+          {/* BAGIAN KANAN (Links) */}
           <div className="grid grid-cols-2 gap-8 md:pl-20">
-            {/* Menu */}
+            {/* Sitemaps */}
             <div className="space-y-6">
-                <h4 className="font-bold uppercase tracking-widest text-sm text-gray-400">Menu</h4>
-                {/* Hapus hover:opacity di sini */}
-                <ul className="space-y-2 font-medium"> 
-                    <li><Magnetic><a href="#" className="inline-block p-2 transition-colors">Home</a></Magnetic></li>
-                    <li><Magnetic><a href="#services" className="inline-block p-2 transition-colors">Services</a></Magnetic></li>
-                    <li><Magnetic><a href="#portfolio" className="inline-block p-2 transition-colors">Portfolio</a></Magnetic></li>
-                    <li><Magnetic><a href="#contact" className="inline-block p-2 transition-colors">Contact</a></Magnetic></li>
+                <h4 className="font-bold uppercase tracking-widest text-sm text-gray-400">Sitemap</h4>
+                <ul className="space-y-2 font-medium">
+                    <li><Magnetic><a href="#home" className="inline-block p-2 transition-colors hover:text-darae-accent">Home</a></Magnetic></li>
+                    <li><Magnetic><a href="#about" className="inline-block p-2 transition-colors hover:text-darae-accent">About</a></Magnetic></li>
+                    <li><Magnetic><a href="#pricing" className="inline-block p-2 transition-colors hover:text-darae-accent">Services</a></Magnetic></li>
+                    <li><Magnetic><a href="#portfolio" className="inline-block p-2 transition-colors hover:text-darae-accent">Work</a></Magnetic></li>
                 </ul>
             </div>
 
@@ -60,10 +42,10 @@ export default function Footer() {
             <div className="space-y-6">
                 <h4 className="font-bold uppercase tracking-widest text-sm text-gray-400">Connect</h4>
                 <ul className="space-y-2 font-medium">
-                    <li><Magnetic><a href="#" className="inline-block p-2 transition-colors">Instagram</a></Magnetic></li>
-                    <li><Magnetic><a href="#" className="inline-block p-2 transition-colors">LinkedIn</a></Magnetic></li>
-                    <li><Magnetic><a href="#" className="inline-block p-2 transition-colors">Dribbble</a></Magnetic></li>
-                    <li><Magnetic><a href="#" className="inline-block p-2 transition-colors">GitHub</a></Magnetic></li>
+                    <li><Magnetic><a href="#" className="inline-block p-2 transition-colors hover:text-darae-accent">Instagram</a></Magnetic></li>
+                    <li><Magnetic><a href="#" className="inline-block p-2 transition-colors hover:text-darae-accent">LinkedIn</a></Magnetic></li>
+                    <li><Magnetic><a href="#" className="inline-block p-2 transition-colors hover:text-darae-accent">Dribbble</a></Magnetic></li>
+                    <li><Magnetic><a href="#" className="inline-block p-2 transition-colors hover:text-darae-accent">GitHub</a></Magnetic></li>
                 </ul>
             </div>
           </div>
@@ -77,6 +59,7 @@ export default function Footer() {
                 <a href="#" className="hover:text-darae-charcoal dark:hover:text-white transition-colors">Terms of Service</a>
             </div>
         </div>
+
       </div>
     </footer>
   )

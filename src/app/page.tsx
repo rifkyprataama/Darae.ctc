@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import HomeSection from "@/components/HomeSection";
 import About from "@/components/About";
 import Pricing from "@/components/Pricing";
@@ -12,8 +11,6 @@ import FloatingContact from "@/components/FloatingContact";
 export default function Home() {
   return (
     <main className="min-h-screen selection:bg-purple-500 selection:text-white">
-      <Navbar />
-
       <div id="home">
         <HomeSection />
       </div>
@@ -33,7 +30,6 @@ export default function Home() {
       </div>
 
       <Footer />
-      <FloatingContact />
     </main>
   );
 }

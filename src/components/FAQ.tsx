@@ -30,9 +30,7 @@ const faqs = [
 ]
 
 export default function FAQ() {
-    // REVISI DISINI: Ubah dari 0 menjadi null
     const [activeIndex, setActiveIndex] = useState<number | null>(null) 
-    
     const [isModalOpen, setIsModalOpen] = useState(false)
     const { setIsHovered } = useCursor()
 
@@ -80,21 +78,24 @@ export default function FAQ() {
                                     </div>
                                 </div>
 
-                                {/* TOMBOL KONSULTASI (Hitam -> Hover Biru) */}
-                                <Magnetic>
-                                    <button 
-                                        onClick={() => setIsModalOpen(true)}
-                                        onMouseEnter={() => setIsHovered(true)}
-                                        onMouseLeave={() => setIsHovered(false)}
-                                        className="group relative w-full inline-flex items-center justify-center gap-3 bg-darae-charcoal dark:bg-white text-white dark:text-black hover:bg-darae-accent hover:text-white dark:hover:text-white font-bold py-4 px-6 rounded-full overflow-hidden transition-all shadow-xl shadow-darae-charcoal/20 hover:shadow-darae-accent/30 active:scale-95 cursor-pointer"
-                                    >
-                                        <span className="relative z-10 flex items-center gap-2">
-                                            Konsultasi Project
-                                        </span>
-                                        <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform group-hover:text-white" />
-                                    </button>
-                                </Magnetic>
-                                <p className="text-center mt-3 text-[10px] text-gray-400 font-medium">
+                                {/* TOMBOL KONSULTASI (DITENGAHKAN) */}
+                                <div className="w-full flex justify-center"> {/* <--- Wrapper Penengah */}
+                                    <Magnetic>
+                                        <button 
+                                            onClick={() => setIsModalOpen(true)}
+                                            onMouseEnter={() => setIsHovered(true)}
+                                            onMouseLeave={() => setIsHovered(false)}
+                                            className="group relative w-full inline-flex items-center justify-center gap-3 bg-darae-charcoal dark:bg-white text-white dark:text-black hover:bg-darae-accent hover:text-white dark:hover:text-white font-bold py-4 px-8 rounded-full overflow-hidden transition-all shadow-xl shadow-darae-charcoal/20 hover:shadow-darae-accent/30 active:scale-95 cursor-pointer"
+                                        >
+                                            <span className="relative z-10 flex items-center gap-2">
+                                                Konsultasi Project
+                                            </span>
+                                            <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform group-hover:text-white" />
+                                        </button>
+                                    </Magnetic>
+                                </div>
+                                
+                                <p className="text-center mt-4 text-[10px] text-gray-400 font-medium">
                                     Respon cepat dalam 24 jam
                                 </p>
 

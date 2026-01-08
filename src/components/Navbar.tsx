@@ -4,20 +4,19 @@ import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import Magnetic from "./ui/Magnetic";
 import Image from "next/image";
-import ConsultationModal from "./ConsultationModal";
+import ConsultationModal from "./ConsultationModal"; // 1. IMPORT MODAL
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+
+  // 2. STATE UNTUK MODAL
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Perbaikan Logic Scroll agar lebih mulus
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
-      // Logic: Sembunyikan navbar jika scroll ke bawah lebih dari 50px
       if (currentScrollY > lastScrollY && currentScrollY > 50) {
         setIsVisible(false);
       } else {
@@ -40,15 +39,15 @@ export default function Navbar() {
 
   return (
     <>
-    {/* Modal dipanggil disini */}
+    {/* 3. PASANG MODAL DI LUAR NAV TAPI DI DALAM FRAGMENT */}
     <ConsultationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
     <nav 
         className={`
             fixed top-0 w-full z-50 
-            transition-transform duration-500 ease-in-out border-b border-transparent
+            transition-all duration-500 ease-in-out border-b border-transparent
             ${isVisible ? 'translate-y-0' : '-translate-y-full'} 
-            ${lastScrollY > 20 ? 'bg-darae-light/90 dark:bg-darae-dark/90 backdrop-blur-md border-darae-grey/10 shadow-sm' : 'bg-transparent'}
+            ${lastScrollY > 20 ? 'bg-darae-light/90 dark:bg-darae-dark/90 backdrop-blur-md border-darae-grey/10' : 'bg-transparent'}
         `}
     >
       
@@ -57,7 +56,7 @@ export default function Navbar() {
           {/* LOGO */}
           <div className="flex-shrink-0 z-50">
             <Link href="/" className="transition-opacity hover:opacity-70 block">
-                <div className="relative h-10 w-32 md:w-40"> 
+                <div className="relative h-10 w-40"> 
                     <Image 
                         src="/logo-light.png"  
                         alt="Darae Logo"
@@ -96,10 +95,10 @@ export default function Navbar() {
                 </div>
             </Magnetic>
 
-            {/* Tombol Konsultasi */}
+            {/* 4. TOMBOL PEMICU MODAL (UBAH LINK JADI BUTTON/DIV dengan onClick) */}
             <Magnetic>
                 <button 
-                    onClick={() => setIsModalOpen(true)}
+                    onClick={() => setIsModalOpen(true)} // BUKA MODAL
                     className="bg-darae-charcoal text-white dark:bg-white dark:text-darae-charcoal px-6 py-3 rounded-[2rem] hover:scale-105 transition-transform font-bold text-sm shadow-lg shadow-darae-charcoal/10 inline-block cursor-pointer"
                 >
                     Konsultasi Gratis
@@ -107,7 +106,7 @@ export default function Navbar() {
             </Magnetic>
           </div>
 
-          {/* MOBILE TOGGLE (Hamburger) */}
+          {/* MOBILE TOGGLE */}
           <div className="md:hidden ml-auto z-50 flex items-center gap-4">
             <ThemeToggle />
 
@@ -124,7 +123,7 @@ export default function Navbar() {
 
       </div>
 
-      {/* MOBILE MENU OVERLAY */}
+      {/* MOBILE MENU */}
       {isOpen && (
         <div className="absolute top-0 left-0 w-full h-screen bg-darae-light dark:bg-darae-dark flex flex-col items-center justify-center space-y-6 md:hidden z-40 animate-fadeIn">
            {navItems.map((item, index) => (
@@ -138,6 +137,7 @@ export default function Navbar() {
                </Link>
            ))}
 
+           {/* Tombol Mobile Juga Buka Modal */}
            <button
              onClick={() => {
                 setIsOpen(false);
