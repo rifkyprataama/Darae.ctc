@@ -10,7 +10,7 @@ import FloatingContact from "@/components/FloatingContact";
 
 export default function Home() {
   return (
-    <main className="min-h-screen selection:bg-purple-500 selection:text-white">
+    <main className="min-h-screen selection:bg-blue-600 selection:text-white">
       <div id="home">
         <HomeSection />
       </div>
