@@ -16,6 +16,7 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
+      // randomuser.me SUDAH DIHAPUS
     ],
   },
 };

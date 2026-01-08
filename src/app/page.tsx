@@ -2,7 +2,9 @@ import Navbar from "@/components/Navbar";
 import HomeSection from "@/components/HomeSection";
 import About from "@/components/About";
 import Pricing from "@/components/Pricing";
-import Portofolio from "@/components/Portofolio";
+import Portfolio from "@/components/Portfolio";
+import Testimonials from "@/components/Testimonials";
+import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
@@ -17,12 +19,14 @@ export default function Home() {
       </div>
 
       <About />
-
       <Pricing />
 
       <div id="portfolio">
-        <Portofolio />
+        <Portfolio />
       </div>
+
+      <Testimonials />
+      <FAQ />
 
       <div id="contact">
         <Contact />

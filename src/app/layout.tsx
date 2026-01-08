@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { Providers } from "./providers"; // <--- Panggil file yang baru kita rapikan
+import Navbar from "@/components/Navbar"; 
 import StickyCursor from "@/components/ui/StickyCursor";
 import FloatingContact from "@/components/FloatingContact";
-import { CursorProvider } from "@/context/CursorContext"; 
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Darae | Jasa IT & Digital Creative",
-  description: "Solusi digital all-in-one: Pembuatan Website, Aplikasi Mobile, Video Editing, dan Desain Grafis. Konsultasi Gratis sekarang.",
+  description: "Solusi digital all-in-one: Pembuatan Website, Aplikasi Mobile, Video Editing, dan Desain Grafis.",
   icons: {
     icon: '/icon.svg',
     shortcut: '/icon.png',
@@ -30,24 +30,15 @@ export default function RootLayout({
             bg-darae-light text-darae-charcoal 
             dark:bg-darae-dark dark:text-darae-light`}
         >
-          <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              {/* Context Provider untuk Kursor */}
-              <CursorProvider>
-                  
-                  <StickyCursor />
-                  
-                  {children}
-                  
-                  <FloatingContact />
-                  
-              </CursorProvider>
-
-          </ThemeProvider>
+          {/* PANGGIL PROVIDERS DISINI (Isinya Theme + Cursor) */}
+          <Providers>
+              
+              <StickyCursor />
+              <Navbar />
+              {children}
+              <FloatingContact />
+              
+          </Providers>
         </body>
       </html>
     );

@@ -1,12 +1,12 @@
 'use client'
 import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { useCursor } from '@/context/CursorContext' // 1. Import Context
+import { useCursor } from '@/context/CursorContext'
 
 export default function Magnetic({ children }: { children: React.ReactNode }) {
     const ref = useRef<HTMLDivElement>(null)
     const [position, setPosition] = useState({x: 0, y: 0})
-    const { setIsHovered } = useCursor() // 2. Ambil remote control
+    const { setIsHovered } = useCursor()
 
     const handleMouse = (e: React.MouseEvent) => {
         const { clientX, clientY } = e
@@ -16,26 +16,30 @@ export default function Magnetic({ children }: { children: React.ReactNode }) {
         const middleX = clientX - (left + width/2)
         const middleY = clientY - (top + height/2)
 
+        // Angka 0.35 adalah kekuatan magnet. 
+        // Ubah ke 0.2 jika ingin gerakannya lebih halus/pelan.
         setPosition({x: middleX * 0.35, y: middleY * 0.35})
     }
 
     const reset = () => {
         setPosition({x:0, y:0})
-        setIsHovered(false) // 4. Kecilkan saat mouse pergi
+        setIsHovered(false)
     }
 
     const handleEnter = () => {
-        setIsHovered(true) // 3. Besarkan saat mouse masuk
+        setIsHovered(true)
     }
 
     const { x, y } = position
     return (
         <motion.div
-            style={{position: "relative"}}
+            // REVISI PENTING: Tambahkan display: "inline-block"
+            // Ini menjaga agar elemen tidak melebar memenuhi layar (block) yang bisa merusak Navbar
+            style={{ position: "relative", display: "inline-block" }} 
             ref={ref}
             onMouseMove={handleMouse}
-            onMouseEnter={handleEnter} // Trigger masuk
-            onMouseLeave={reset}       // Trigger keluar
+            onMouseEnter={handleEnter}
+            onMouseLeave={reset}
             animate={{x, y}}
             transition={{type: "spring", stiffness: 150, damping: 15, mass: 0.1}}
         >
