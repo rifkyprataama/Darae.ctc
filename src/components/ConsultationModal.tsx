@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { X } from 'lucide-react'
 
 interface ModalProps {
     isOpen: boolean;
@@ -33,11 +34,11 @@ export default function ConsultationModal({ isOpen, onClose }: ModalProps) {
         {isOpen && (
             // 1. BACKDROP (Latar Gelap Blur)
             <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={onClose}
+                className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
             >
             
             {/* 2. MODAL CONTAINER */}
@@ -46,20 +47,18 @@ export default function ConsultationModal({ isOpen, onClose }: ModalProps) {
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.9, opacity: 0, y: 20 }}
                 onClick={(e) => e.stopPropagation()} // Agar klik di dalam modal tidak menutup modal
-                className="w-full max-w-md bg-white dark:bg-[#1A1A1A] rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden"
+                className="w-full max-w-md bg-white dark:bg-[#1f2327] rounded-[2rem] shadow-2xl border border-gray-200 dark:border-white/10 overflow-hidden"
             >
                 
                 {/* HEADER */}
-                <div className="flex justify-between items-center p-6 border-b border-gray-100 dark:border-gray-800">
+                <div className="flex justify-between items-center p-6 border-b border-gray-100 dark:border-white/5">
                     <div>
                         <h3 className="text-xl font-bold text-darae-charcoal dark:text-white">Konsultasi Gratis</h3>
-                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Ceritakan ide Anda, kami siap wujudkan.</p>
+                        <p className="text-xs text-darae-charcoal/60 dark:text-gray-400 mt-1">Ceritakan ide Anda, kami siap wujudkan.</p>
                     </div>
                     {/* Tombol Close (X) */}
-                    <button onClick={onClose} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors">
-                        <svg className="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
+                    <button onClick={onClose} className="p-2 bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 rounded-full transition-colors text-darae-charcoal dark:text-white">
+                        <X className="w-5 h-5" />
                     </button>
                 </div>
 
@@ -68,11 +67,15 @@ export default function ConsultationModal({ isOpen, onClose }: ModalProps) {
                     
                     {/* Input Nama */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nama Lengkap</label>
+                        <label className="block text-sm font-bold text-darae-charcoal/80 dark:text-gray-300 mb-1.5 ml-1">Nama Lengkap</label>
                         <input 
                             type="text" 
                             placeholder="Masukkan nama Anda"
-                            className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-[#252525] border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-darae-charcoal dark:focus:ring-white text-sm text-gray-900 dark:text-white transition-all"
+                            className="w-full px-4 py-3 rounded-xl 
+                                bg-gray-50 dark:bg-white/5 
+                                border border-gray-200 dark:border-white/10 
+                                focus:outline-none focus:ring-2 focus:ring-darae-accent dark:focus:ring-darae-gold 
+                                text-sm text-darae-charcoal dark:text-white transition-all placeholder:text-gray-400"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
@@ -80,11 +83,15 @@ export default function ConsultationModal({ isOpen, onClose }: ModalProps) {
 
                     {/* Input Kontak */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nomor WhatsApp / Email</label>
+                        <label className="block text-sm font-bold text-darae-charcoal/80 dark:text-gray-300 mb-1.5 ml-1">Nomor WhatsApp / Email</label>
                         <input 
                             type="text" 
                             placeholder="Contoh: 0812..."
-                            className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-[#252525] border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-darae-charcoal dark:focus:ring-white text-sm text-gray-900 dark:text-white transition-all"
+                            className="w-full px-4 py-3 rounded-xl 
+                                bg-gray-50 dark:bg-white/5 
+                                border border-gray-200 dark:border-white/10 
+                                focus:outline-none focus:ring-2 focus:ring-darae-accent dark:focus:ring-darae-gold 
+                                text-sm text-darae-charcoal dark:text-white transition-all placeholder:text-gray-400"
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                         />
@@ -92,11 +99,15 @@ export default function ConsultationModal({ isOpen, onClose }: ModalProps) {
 
                     {/* Input Pesan (Opsional) */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Topik Diskusi (Opsional)</label>
+                        <label className="block text-sm font-bold text-darae-charcoal/80 dark:text-gray-300 mb-1.5 ml-1">Topik Diskusi (Opsional)</label>
                         <textarea 
                             rows={2}
                             placeholder="Ingin buat website toko online..."
-                            className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-[#252525] border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-darae-charcoal dark:focus:ring-white text-sm text-gray-900 dark:text-white transition-all resize-none"
+                            className="w-full px-4 py-3 rounded-xl 
+                                bg-gray-50 dark:bg-white/5 
+                                border border-gray-200 dark:border-white/10 
+                                focus:outline-none focus:ring-2 focus:ring-darae-accent dark:focus:ring-darae-gold 
+                                text-sm text-darae-charcoal dark:text-white transition-all resize-none placeholder:text-gray-400"
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
                         />
@@ -119,7 +130,7 @@ export default function ConsultationModal({ isOpen, onClose }: ModalProps) {
                     {/* Tombol Sekunder: Email */}
                     <button 
                         onClick={handleEmail}
-                        className="w-full py-3.5 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-darae-charcoal dark:text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-colors"
+                        className="w-full py-3.5 bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 text-darae-charcoal dark:text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-colors"
                     >
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                         Kirim Email Saja

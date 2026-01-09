@@ -10,12 +10,20 @@ import FloatingContact from "@/components/FloatingContact";
 
 export default function Home() {
   return (
-    <main className="min-h-screen selection:bg-blue-600 selection:text-white">
+    // 1. bg-transparent: Agar background mesh dari layout.tsx terlihat
+    // 2. selection:bg-darae-accent: Agar highlight teks berwarna Merah (Branding)
+    <main className="min-h-screen bg-transparent selection:bg-darae-accent selection:text-white overflow-x-hidden">
+      
       <div id="home">
         <HomeSection />
       </div>
 
       <About />
+      
+      {/* Tips UX: Biasanya Pricing ditaruh setelah Portfolio/Testimoni 
+         agar user "percaya" dulu sebelum melihat harga. 
+         Tapi urutan ini tetap sah.
+      */}
       <Pricing />
 
       <div id="portfolio">
@@ -23,6 +31,7 @@ export default function Home() {
       </div>
 
       <Testimonials />
+      
       <FAQ />
 
       <div id="contact">
@@ -30,6 +39,10 @@ export default function Home() {
       </div>
 
       <Footer />
+      
+      {/* Jangan lupa render Floating Contact (WA) */}
+      <FloatingContact />
+      
     </main>
   );
 }

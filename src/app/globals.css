@@ -2,18 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 1. SETUP HALAMAN */
+/* =========================================
+   1. SETUP WARNA & BACKGROUND (NEW PALETTE)
+   ========================================= */
+@layer base {
+  :root {
+    /* Mode Light: Background Off-White, Teks Charcoal */
+    --background: #f3f4f3; 
+    --foreground: #1f2327; 
+  }
+
+  .dark {
+    /* Mode Dark: Background Charcoal, Teks Off-White */
+    --background: #1f2327;
+    --foreground: #f3f4f3;
+  }
+
+  body {
+    /* Terapkan variabel ke body */
+    @apply bg-background text-foreground transition-colors duration-500;
+  }
+}
+
+@layer utilities {
+  /* MODE LIGHT: "Airy Blue/Gold" 
+     Background dasar putih tulang, dengan pendaran halus Biru & Emas.
+  */
+  .bg-mesh-light {
+    background-color: var(--background);
+    background-image: 
+      radial-gradient(at 20% 30%, rgba(173, 193, 200, 0.2) 0px, transparent 50%), /* Blue #adc1c8 */
+      radial-gradient(at 80% 70%, rgba(240, 217, 173, 0.3) 0px, transparent 50%); /* Gold #f0d9ad */
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  /* MODE DARK: "Glowing Red"
+     Background dasar charcoal, dengan pendaran kuat Merah di pojok & Taupe di bawah.
+  */
+  .bg-mesh-dark {
+    background-color: var(--background);
+    background-image: 
+      radial-gradient(at 90% 10%, rgba(170, 15, 33, 0.35) 0px, transparent 60%), /* Red #aa0f21 */
+      radial-gradient(at 10% 90%, rgba(142, 136, 135, 0.15) 0px, transparent 50%); /* Taupe #8e8887 */
+    background-attachment: fixed;
+    background-size: cover;
+  }
+}
+
+/* =========================================
+   2. SETUP HALAMAN & SCROLL
+   ========================================= */
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; <-- SUDAH BENAR DIKOMENTARI KARENA PAKAI LENIS */
   scroll-padding-top: 100px;
 }
 
-body {
-  /* Memastikan transisi warna background halus saat ganti tema */
-  @apply transition-colors duration-300;
-}
-
-/* 2. KUSTOMISASI SCROLLBAR (PREMIUM LOOK) */
+/* =========================================
+   3. KUSTOMISASI SCROLLBAR (PREMIUM LOOK)
+   ========================================= */
 
 /* Lebar Scrollbar */
 ::-webkit-scrollbar {
@@ -39,7 +86,7 @@ body {
   border: 3px solid transparent; 
 }
 
-/* 3. KHUSUS DARK MODE */
+/* KHUSUS DARK MODE */
 .dark ::-webkit-scrollbar-thumb {
   @apply bg-white/20; 
 }
@@ -48,5 +95,25 @@ body {
   @apply bg-darae-accent; 
 }
 
-/* BAGIAN PENGHILANG KURSOR SUDAH DIHAPUS DI SINI */
-/* Sekarang panah mouse asli akan terlihat + bola hitam mengikutinya */
+/* =========================================
+   4. SETTING LENIS (SCROLL SMOOTH)
+   ========================================= */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important; /* Mematikan smooth scroll bawaan browser sepenuhnya */
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none; /* Agar mouse tidak nyangkut di iframe saat scrolling */
+}

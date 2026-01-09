@@ -4,7 +4,6 @@ import { useEffect } from 'react'
 import { X, Github, ExternalLink, Calendar, User, Briefcase, Sparkles } from 'lucide-react'
 import Image from 'next/image'
 import Magnetic from './ui/Magnetic'
-// 1. IMPORT CONTEXT KURSOR (Agar modal bisa komunikasi sama bola hitam)
 import { useCursor } from '@/context/CursorContext'
 
 interface ProjectData {
@@ -30,12 +29,13 @@ interface ProjectModalProps {
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
     
-    // 2. AMBIL FUNGSI SETISHOVERED
     const { setIsHovered } = useCursor();
 
     useEffect(() => {
+        // 1. Matikan Scroll Body Browser
         document.body.style.overflow = 'hidden';
         return () => {
+            // 2. Hidupkan kembali saat modal tutup
             document.body.style.overflow = 'unset';
         }
     }, [])
@@ -56,7 +56,6 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             <div 
                 className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" 
                 onClick={onClose}
-                // Safety: Pastikan kursor normal jika mouse lari ke backdrop
                 onMouseEnter={() => setIsHovered(false)}
             ></div>
 
@@ -65,7 +64,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.9, opacity: 0, y: 30 }}
                 transition={{ type: "spring", duration: 0.5 }}
-                className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-[#121212] rounded-[2.5rem] shadow-2xl flex flex-col border border-white/20"
+                className="relative w-full max-w-4xl max-h-[90vh] bg-white dark:bg-[#121212] rounded-[2.5rem] shadow-2xl flex flex-col border border-white/20 overflow-hidden"
                 onClick={(e) => e.stopPropagation()}
             >
                 
@@ -85,10 +84,9 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                         <Magnetic>
                             <button 
                                 onClick={onClose}
-                                // 3. TRIGGER KURSOR TRANSPARAN (Saat Hover Close)
                                 onMouseEnter={() => setIsHovered(true)}
                                 onMouseLeave={() => setIsHovered(false)}
-                                className="w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/10 hover:bg-white hover:text-black transition-all cursor-pointer"
+                                className="w-10 h-10 bg-black/30 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/20 hover:bg-white hover:text-black transition-all cursor-pointer"
                             >
                                 <X className="w-5 h-5" />
                             </button>
@@ -104,8 +102,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                             <span className={`
                                 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border mb-3 inline-block backdrop-blur-md
                                 ${project.type === 'it' 
-                                    ? 'bg-blue-500/20 border-blue-400/30 text-blue-100' 
-                                    : 'bg-pink-500/20 border-pink-400/30 text-pink-100'}
+                                    ? 'bg-darae-blue/20 border-darae-blue/30 text-blue-100' 
+                                    : 'bg-darae-gold/20 border-darae-gold/30 text-yellow-100'}
                             `}>
                                 {project.category}
                             </span>
@@ -117,7 +115,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 </div>
 
                 {/* --- CONTENT BODY --- */}
-                <div className="flex-1 overflow-y-auto p-8 md:p-10 custom-scrollbar">
+                <div 
+                    data-lenis-prevent
+                    className="flex-1 overflow-y-auto p-8 md:p-10 custom-scrollbar overscroll-contain"
+                >
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
                         
                         <div className="md:col-span-4 space-y-8">
@@ -166,7 +167,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                                 <div className="flex flex-wrap gap-2">
                                     {project.technologies?.map((tech, i) => (
                                         <span key={i} className="px-4 py-2 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl text-sm font-medium text-darae-charcoal dark:text-gray-200 flex items-center gap-2">
-                                            <span className={`w-1.5 h-1.5 rounded-full ${project.type === 'it' ? 'bg-blue-500' : 'bg-pink-500'}`}></span>
+                                            <span className={`w-1.5 h-1.5 rounded-full ${project.type === 'it' ? 'bg-darae-blue' : 'bg-darae-gold'}`}></span>
                                             {tech}
                                         </span>
                                     ))}
@@ -187,7 +188,6 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                                    href={project.demoUrl} 
                                    target="_blank" 
                                    rel="noreferrer" 
-                                   // 4. TRIGGER KURSOR TRANSPARAN
                                    onMouseEnter={() => setIsHovered(true)}
                                    onMouseLeave={() => setIsHovered(false)}
                                    className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-darae-charcoal dark:bg-white text-white dark:text-black rounded-full font-bold hover:scale-[1.02] transition-transform cursor-pointer"
@@ -205,7 +205,6 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                                    href={project.repoUrl} 
                                    target="_blank" 
                                    rel="noreferrer" 
-                                   // 5. TRIGGER KURSOR TRANSPARAN
                                    onMouseEnter={() => setIsHovered(true)}
                                    onMouseLeave={() => setIsHovered(false)}
                                    className={`w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full font-bold transition-transform hover:scale-[1.02] cursor-pointer
@@ -224,7 +223,6 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                         <Magnetic>
                             <button 
                                 onClick={handleOrderSimilar}
-                                // 6. TRIGGER KURSOR TRANSPARAN
                                 onMouseEnter={() => setIsHovered(true)}
                                 onMouseLeave={() => setIsHovered(false)}
                                 className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-transparent border-2 border-darae-accent text-darae-accent rounded-full font-bold hover:bg-darae-accent hover:text-white transition-all cursor-pointer"

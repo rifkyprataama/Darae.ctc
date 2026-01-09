@@ -4,14 +4,12 @@ import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import Magnetic from "./ui/Magnetic";
 import Image from "next/image";
-import ConsultationModal from "./ConsultationModal"; // 1. IMPORT MODAL
+import ConsultationModal from "./ConsultationModal"; 
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-
-  // 2. STATE UNTUK MODAL
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -39,7 +37,6 @@ export default function Navbar() {
 
   return (
     <>
-    {/* 3. PASANG MODAL DI LUAR NAV TAPI DI DALAM FRAGMENT */}
     <ConsultationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
     <nav 
@@ -47,7 +44,15 @@ export default function Navbar() {
             fixed top-0 w-full z-50 
             transition-all duration-500 ease-in-out border-b border-transparent
             ${isVisible ? 'translate-y-0' : '-translate-y-full'} 
-            ${lastScrollY > 20 ? 'bg-darae-light/90 dark:bg-darae-dark/90 backdrop-blur-md border-darae-grey/10' : 'bg-transparent'}
+            
+            /* --- UPDATE BACKGROUND NAVBAR --- 
+               Light: Putih transparan agar Airy
+               Dark: Charcoal transparan agar Glowing
+            */
+            ${lastScrollY > 20 
+                ? 'bg-white/80 dark:bg-[#1f2327]/80 backdrop-blur-md border-gray-200/50 dark:border-white/5 shadow-sm' 
+                : 'bg-transparent'
+            }
         `}
     >
       
@@ -79,7 +84,13 @@ export default function Navbar() {
           <div className="hidden md:flex absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 items-center space-x-1">
             {navItems.map((item, index) => (
                 <Magnetic key={index}>
-                    <Link href={item.link} className="text-sm font-medium text-darae-charcoal dark:text-white transition-colors block px-4 py-2 hover:text-darae-accent"> 
+                    <Link href={item.link} 
+                          /* --- UPDATE TEXT COLOR --- 
+                             Light: Hitam -> Hover Merah (darae-accent)
+                             Dark: Putih -> Hover Biru Muted (darae-blue)
+                          */
+                          className="text-sm font-medium text-darae-charcoal dark:text-white transition-colors block px-4 py-2 hover:text-darae-accent dark:hover:text-darae-blue"
+                    > 
                         {item.name}
                     </Link>
                 </Magnetic>
@@ -95,13 +106,36 @@ export default function Navbar() {
                 </div>
             </Magnetic>
 
-            {/* 4. TOMBOL PEMICU MODAL (UBAH LINK JADI BUTTON/DIV dengan onClick) */}
+            {/* TOMBOL KONSULTASI (STRATEGI WARNA BARU) */}
             <Magnetic>
                 <button 
-                    onClick={() => setIsModalOpen(true)} // BUKA MODAL
-                    className="bg-darae-charcoal text-white dark:bg-white dark:text-darae-charcoal px-6 py-3 rounded-[2rem] hover:scale-105 transition-transform font-bold text-sm shadow-lg shadow-darae-charcoal/10 inline-block cursor-pointer"
+                    onClick={() => setIsModalOpen(true)} 
+                    className="group relative cursor-pointer overflow-hidden inline-block px-6 py-3 rounded-[2rem] font-bold text-sm
+                        transition-all duration-300 ease-out 
+                        
+                        /* --- NORMAL STATE --- */
+                        /* Light: Hitam Charcoal */
+                        bg-darae-charcoal text-white 
+                        /* Dark: Gold Mewah, Teks Hitam */
+                        dark:bg-darae-gold dark:text-darae-charcoal
+                        
+                        shadow-lg shadow-darae-charcoal/10
+                        hover:scale-105 hover:shadow-darae-accent/40"
                 >
-                    Konsultasi Gratis
+                    {/* --- HOVER SLIDING BACKGROUND --- */}
+                    <div className={`
+                        absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out
+                        
+                        /* Light Hover: Merah (Accent) */
+                        bg-darae-accent
+                        /* Dark Hover: Biru Muted (Blue) */
+                        dark:bg-darae-blue
+                    `}></div>
+                    
+                    {/* --- TEXT HOVER --- */}
+                    <span className="relative z-10 group-hover:text-white dark:group-hover:text-black transition-colors duration-300">
+                        Konsultasi Gratis
+                    </span>
                 </button>
             </Magnetic>
           </div>
@@ -111,7 +145,7 @@ export default function Navbar() {
             <ThemeToggle />
 
             <button onClick={() => setIsOpen(!isOpen)} className="text-darae-charcoal dark:text-white focus:outline-none transition-transform duration-300">
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 24 24">
                 {isOpen ? (
                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 ) : (
@@ -125,12 +159,13 @@ export default function Navbar() {
 
       {/* MOBILE MENU */}
       {isOpen && (
-        <div className="absolute top-0 left-0 w-full h-screen bg-darae-light dark:bg-darae-dark flex flex-col items-center justify-center space-y-6 md:hidden z-40 animate-fadeIn">
+        <div className="absolute top-0 left-0 w-full h-screen bg-[#f3f4f3] dark:bg-[#1f2327] flex flex-col items-center justify-center space-y-6 md:hidden z-40 animate-fadeIn">
            {navItems.map((item, index) => (
                <Link
                  key={index}
                  href={item.link}
-                 className="text-xl font-bold text-darae-charcoal dark:text-white transition-transform hover:scale-110"
+                 /* Mobile Hover: Merah (Light) / Biru (Dark) */
+                 className="text-xl font-bold text-darae-charcoal dark:text-white transition-transform hover:scale-110 hover:text-darae-accent dark:hover:text-darae-blue"
                  onClick={() => setIsOpen(false)}
                >
                  {item.name}
@@ -143,7 +178,9 @@ export default function Navbar() {
                 setIsOpen(false);
                 setIsModalOpen(true);
              }}
-             className="mt-4 text-xl font-bold bg-darae-charcoal text-white dark:bg-white dark:text-darae-charcoal px-8 py-3 rounded-[2rem] hover:scale-105 transition-transform shadow-xl"
+             className="mt-4 text-xl font-bold px-8 py-3 rounded-[2rem] hover:scale-105 transition-transform shadow-xl
+                bg-darae-charcoal text-white hover:bg-darae-accent
+                dark:bg-darae-gold dark:text-darae-charcoal dark:hover:bg-darae-blue dark:hover:text-black"
            >
              Konsultasi Gratis
            </button>
