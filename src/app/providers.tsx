@@ -10,7 +10,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
-      {/* Kita bungkus aplikasi dengan Cursor Provider di sini */}
       <CursorProvider>
          {children}
       </CursorProvider>

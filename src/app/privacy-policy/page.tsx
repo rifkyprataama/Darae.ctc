@@ -67,7 +67,7 @@ export default function PrivacyPolicy() {
             <section>
                 <h3 className="text-2xl font-bold mb-4 text-darae-charcoal dark:text-white">5. Kontak Kami</h3>
                 <p>
-                    Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini, silakan hubungi kami melalui email di <a href="mailto:hello@darae.ctc" className="text-darae-accent hover:underline font-bold">hello@darae.ctc</a>.
+                    Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini, silakan hubungi kami melalui email di <a href="mailto:daraectc@gmail.com" className="text-darae-accent hover:underline font-bold">daraectc@gmail.com</a>.
                 </p>
             </section>
 

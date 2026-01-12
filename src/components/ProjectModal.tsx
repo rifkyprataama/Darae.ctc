@@ -28,21 +28,18 @@ interface ProjectModalProps {
 }
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
-    
     const { setIsHovered } = useCursor();
 
     useEffect(() => {
-        // 1. Matikan Scroll Body Browser
         document.body.style.overflow = 'hidden';
         return () => {
-            // 2. Hidupkan kembali saat modal tutup
             document.body.style.overflow = 'unset';
         }
     }, [])
 
     const handleOrderSimilar = () => {
         const message = `Halo Darae, saya melihat portofolio "${project.title}" dan tertarik membuat project yang serupa/mirip. Bisa diskusi?`;
-        window.open(`https://wa.me/6281234567890?text=${encodeURIComponent(message)}`, '_blank');
+        window.open(`https://wa.me/6282117088846?text=${encodeURIComponent(message)}`, '_blank');
     }
 
     return (
@@ -185,38 +182,38 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                         {project.demoUrl && (
                             <Magnetic>
                                 <a 
-                                   href={project.demoUrl} 
-                                   target="_blank" 
-                                   rel="noreferrer" 
-                                   onMouseEnter={() => setIsHovered(true)}
-                                   onMouseLeave={() => setIsHovered(false)}
-                                   className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-darae-charcoal dark:bg-white text-white dark:text-black rounded-full font-bold hover:scale-[1.02] transition-transform cursor-pointer"
+                                    href={project.demoUrl} 
+                                    target="_blank" 
+                                    rel="noreferrer" 
+                                    onMouseEnter={() => setIsHovered(true)}
+                                    onMouseLeave={() => setIsHovered(false)}
+                                    className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-darae-charcoal dark:bg-white text-white dark:text-black rounded-full font-bold hover:scale-[1.02] transition-transform cursor-pointer"
                                 >
-                                   <ExternalLink className="w-5 h-5" />
-                                   Visit Live Site
+                                    <ExternalLink className="w-5 h-5" />
+                                    Visit Live Site
                                 </a>
                             </Magnetic>
                         )}
 
                         {/* TOMBOL REPOSITORY */}
                         {project.repoUrl && (
-                             <Magnetic>
+                            <Magnetic>
                                 <a 
-                                   href={project.repoUrl} 
-                                   target="_blank" 
-                                   rel="noreferrer" 
-                                   onMouseEnter={() => setIsHovered(true)}
-                                   onMouseLeave={() => setIsHovered(false)}
-                                   className={`w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full font-bold transition-transform hover:scale-[1.02] cursor-pointer
-                                     ${!project.demoUrl 
+                                    href={project.repoUrl} 
+                                    target="_blank" 
+                                    rel="noreferrer" 
+                                    onMouseEnter={() => setIsHovered(true)}
+                                    onMouseLeave={() => setIsHovered(false)}
+                                    className={`w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full font-bold transition-transform hover:scale-[1.02] cursor-pointer
+                                        ${!project.demoUrl 
                                         ? 'bg-darae-charcoal dark:bg-white text-white dark:text-black' 
                                         : 'bg-gray-100 dark:bg-white/10 text-darae-charcoal dark:text-white border border-transparent' 
-                                     }
-                                   `}>
-                                   <Github className="w-5 h-5" />
-                                   View Repository
+                                        }
+                                    `}>
+                                    <Github className="w-5 h-5" />
+                                    View Repository
                                 </a>
-                             </Magnetic>
+                            </Magnetic>
                         )}
 
                         {/* TOMBOL PESAN SERUPA */}
@@ -231,10 +228,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                                 Pesan Serupa
                             </button>
                         </Magnetic>
-
                     </div>
                 </div>
-
             </motion.div>
         </motion.div>
     )

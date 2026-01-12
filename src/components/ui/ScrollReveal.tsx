@@ -23,17 +23,14 @@ export default function ScrollReveal({
 }: ScrollRevealProps) {
   const ref = useRef(null)
   
-  // 1. Hapus 'once: true' agar animasi bisa berulang
   const isInView = useInView(ref, { margin: "-100px" }) 
   
   const controls = useAnimation()
 
   useEffect(() => {
     if (isInView) {
-      // Saat masuk layar: Muncul
       controls.start("visible")
     } else {
-      // 2. Saat keluar layar: Menghilang (Reset ke posisi awal)
       controls.start("hidden")
     }
   }, [isInView, controls])

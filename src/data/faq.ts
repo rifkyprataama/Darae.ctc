@@ -1,5 +1,3 @@
-// src/data/faq.ts
-
 export const faqData = [
     {
         question: "Berapa lama estimasi pengerjaan website/aplikasi?",

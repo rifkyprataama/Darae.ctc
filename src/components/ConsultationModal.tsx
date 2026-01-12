@@ -9,30 +9,26 @@ interface ModalProps {
 }
 
 export default function ConsultationModal({ isOpen, onClose }: ModalProps) {
-    // State untuk menyimpan input user
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [message, setMessage] = useState('');
 
-    // Logika Buka WhatsApp
     const handleWhatsApp = () => {
         // Format pesan: Halo, nama saya [Nama]. Saya tertarik konsultasi. [Pesan]
         const text = `Halo Darae, nama saya ${name || 'Calon Klien'}. Saya tertarik untuk konsultasi proyek digital. ${message}`;
-        const url = `https://wa.me/6281234567890?text=${encodeURIComponent(text)}`; // GANTI NO WA DISINI
+        const url = `https://wa.me/6282117088846?text=${encodeURIComponent(text)}`; // GANTI NO WA DISINI
         window.open(url, '_blank');
     };
 
-    // Logika Kirim Email
     const handleEmail = () => {
         const subject = `Konsultasi Proyek - ${name}`;
         const body = `Halo Tim Darae,\n\nNama saya: ${name}\nNomor WA: ${phone}\n\nPesan:\n${message || 'Saya ingin diskusi mengenai proyek website/aplikasi.'}`;
-        window.location.href = `mailto:hello@darae.ctc?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = `mailto:daraectc@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`; // ganti email disini
     };
 
     return (
         <AnimatePresence>
         {isOpen && (
-            // 1. BACKDROP (Latar Gelap Blur)
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -40,32 +36,25 @@ export default function ConsultationModal({ isOpen, onClose }: ModalProps) {
                 onClick={onClose}
                 className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
             >
-            
-            {/* 2. MODAL CONTAINER */}
+
             <motion.div
                 initial={{ scale: 0.9, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.9, opacity: 0, y: 20 }}
-                onClick={(e) => e.stopPropagation()} // Agar klik di dalam modal tidak menutup modal
+                onClick={(e) => e.stopPropagation()}
                 className="w-full max-w-md bg-white dark:bg-[#1f2327] rounded-[2rem] shadow-2xl border border-gray-200 dark:border-white/10 overflow-hidden"
             >
-                
-                {/* HEADER */}
                 <div className="flex justify-between items-center p-6 border-b border-gray-100 dark:border-white/5">
                     <div>
                         <h3 className="text-xl font-bold text-darae-charcoal dark:text-white">Konsultasi Gratis</h3>
                         <p className="text-xs text-darae-charcoal/60 dark:text-gray-400 mt-1">Ceritakan ide Anda, kami siap wujudkan.</p>
                     </div>
-                    {/* Tombol Close (X) */}
                     <button onClick={onClose} className="p-2 bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 rounded-full transition-colors text-darae-charcoal dark:text-white">
                         <X className="w-5 h-5" />
                     </button>
                 </div>
 
-                {/* BODY FORM */}
                 <div className="p-6 space-y-4">
-                    
-                    {/* Input Nama */}
                     <div>
                         <label className="block text-sm font-bold text-darae-charcoal/80 dark:text-gray-300 mb-1.5 ml-1">Nama Lengkap</label>
                         <input 
@@ -81,7 +70,6 @@ export default function ConsultationModal({ isOpen, onClose }: ModalProps) {
                         />
                     </div>
 
-                    {/* Input Kontak */}
                     <div>
                         <label className="block text-sm font-bold text-darae-charcoal/80 dark:text-gray-300 mb-1.5 ml-1">Nomor WhatsApp / Email</label>
                         <input 
@@ -97,7 +85,6 @@ export default function ConsultationModal({ isOpen, onClose }: ModalProps) {
                         />
                     </div>
 
-                    {/* Input Pesan (Opsional) */}
                     <div>
                         <label className="block text-sm font-bold text-darae-charcoal/80 dark:text-gray-300 mb-1.5 ml-1">Topik Diskusi (Opsional)</label>
                         <textarea 
@@ -112,13 +99,9 @@ export default function ConsultationModal({ isOpen, onClose }: ModalProps) {
                             onChange={(e) => setMessage(e.target.value)}
                         />
                     </div>
-
                 </div>
 
-                {/* FOOTER ACTIONS */}
                 <div className="p-6 pt-0 flex flex-col gap-3">
-                    
-                    {/* Tombol Utama: WhatsApp (Hijau tapi elegan) */}
                     <button 
                         onClick={handleWhatsApp}
                         className="w-full py-3.5 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-transform active:scale-95 shadow-lg shadow-green-500/20"
@@ -127,7 +110,6 @@ export default function ConsultationModal({ isOpen, onClose }: ModalProps) {
                         Chat via WhatsApp
                     </button>
 
-                    {/* Tombol Sekunder: Email */}
                     <button 
                         onClick={handleEmail}
                         className="w-full py-3.5 bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/20 text-darae-charcoal dark:text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-colors"
@@ -135,9 +117,7 @@ export default function ConsultationModal({ isOpen, onClose }: ModalProps) {
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                         Kirim Email Saja
                     </button>
-
                 </div>
-
             </motion.div>
             </motion.div>
         )}

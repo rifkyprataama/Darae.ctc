@@ -11,6 +11,8 @@ import SmoothScroll from "@/components/SmoothScroll";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  // Saat develop, ini akan menggunakan localhost. Nanti bisa diganti domain asli.
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
   title: "Darae | Jasa IT & Digital Creative",
   description: "Solusi digital all-in-one: Pembuatan Website, Aplikasi Mobile, Video Editing, dan Desain Grafis.",
   openGraph: {
@@ -42,32 +44,19 @@ export default function RootLayout({
     children: React.ReactNode;
   }>) {
     return (
-      <html lang="en" suppressHydrationWarning>
+      <html lang="id" suppressHydrationWarning>
         <body className={inter.className}>
           
-          {/* PANGGIL PROVIDERS (Theme + Context) */}
           <Providers>
-              
-              {/* --- UPDATE LANGKAH 3: WRAPPER BACKGROUND MESH --- 
-                  Div ini membungkus seluruh konten untuk menerapkan background gradient baru.
-              */}
               <div className="min-h-screen w-full bg-mesh-light dark:bg-mesh-dark text-darae-charcoal dark:text-white transition-colors duration-500 relative">
-                  
-                  {/* Efek Salju (Opsional/Visual) */}
                   <Snowfall />
-                  
-                  {/* Kursor Custom */}
                   <StickyCursor />
-
-                  {/* Konten Utama dengan Smooth Scroll */}
                   <SmoothScroll>
                       <Navbar />
                       {children}
                       <FloatingContact />
                   </SmoothScroll>
-
               </div>
-              
           </Providers>
         </body>
       </html>

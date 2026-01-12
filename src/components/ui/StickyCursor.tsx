@@ -1,13 +1,14 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { useCursor } from '@/context/CursorContext'; 
 
 export default function StickyCursor() {
   const { isHovered } = useCursor();
+  const [isMobile, setIsMobile] = useState(false);
 
   // UKURAN DINAMIS:
-  const cursorSize = isHovered ? 50 : 15; // Sedikit diperbesar agar border lebih enak dilihat
+  const cursorSize = isHovered ? 50 : 15; 
   
   const mouse = {
     x: useMotionValue(0),
@@ -27,12 +28,20 @@ export default function StickyCursor() {
     mouse.y.set(clientY - cursorSize / 2);
   }
 
-  useEffect( () => {
-    window.addEventListener("mousemove", manageMouseMove);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    setIsMobile(!mediaQuery.matches);
+
+    if (mediaQuery.matches) {
+        window.addEventListener("mousemove", manageMouseMove);
+    }
+
     return () => {
       window.removeEventListener("mousemove", manageMouseMove);
     }
-  }, [cursorSize])
+  }, [cursorSize]);
+
+  if (isMobile) return null;
 
   return (
     <motion.div 
@@ -46,18 +55,12 @@ export default function StickyCursor() {
       }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className={`
-        fixed pointer-events-none z-[9999] rounded-full flex items-center justify-center
+        hidden md:flex
+        fixed pointer-events-none z-[9999] rounded-full items-center justify-center
         transition-colors duration-300
         
         ${isHovered 
-            // --- STATE HOVER (Lingkaran Besar) ---
-            // Light: Border Merah Aksen, Background Merah Tipis
-            // Dark: Border Emas, Background Emas Tipis
-            ? 'bg-darae-accent/5 dark:bg-darae-gold/10 border border-darae-accent dark:border-darae-gold backdrop-blur-[1px]' 
-            
-            // --- STATE NORMAL (Titik Kecil) ---
-            // Light: Charcoal (Hitam Pekat)
-            // Dark: Gold (Mewah)
+            ? 'bg-darae-accent/5 dark:bg-darae-gold/10 border border-darae-accent dark:border-darae-gold backdrop-blur-[1px]'
             : 'bg-darae-charcoal dark:bg-darae-gold border-none'
         }
       `}

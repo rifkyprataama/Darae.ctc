@@ -4,8 +4,8 @@ import Magnetic from './ui/Magnetic'
 
 export default function FloatingContact() {
   // --- KONFIGURASI WHATSAPP ---
-  const phoneNumber = "6281234567890"; 
-  const message = "Halo Darae.ctc, saya tertarik untuk diskusi project website/desain."; 
+  const phoneNumber = "6282117088846"; 
+  const message = "Halo Darae, saya tertarik untuk diskusi project IT/Creative."; 
   
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
@@ -16,10 +16,7 @@ export default function FloatingContact() {
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-[90] group cursor-pointer"
     >
-      {/* Container Ukuran */}
       <div className="relative w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
-        
-        {/* LINGKARAN BERPUTAR (TEKS) */}
         <div className="absolute inset-0 w-full h-full animate-spin-slow pointer-events-none">
             <svg viewBox="0 0 100 100" width="100%" height="100%">
               <defs>
@@ -31,10 +28,6 @@ export default function FloatingContact() {
                     href="#circlePath" 
                     textLength="232.5"
                     lengthAdjust="spacing"
-                    /* Update Warna Teks:
-                       Light: Charcoal
-                       Dark: Gold (Agar terlihat premium di pojok)
-                    */
                     className="text-[8.5px] fill-current text-darae-charcoal dark:text-darae-gold font-bold uppercase"
                 >
                    - CONTACT -- CONTACT -- CONTACT -
@@ -43,7 +36,6 @@ export default function FloatingContact() {
             </svg>
         </div>
 
-        {/* ICON TENGAH DENGAN MAGNETIC */}
         <Magnetic>
             <div className={`
                 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg
@@ -57,7 +49,6 @@ export default function FloatingContact() {
                 group-hover:shadow-darae-accent/40
                 group-hover:scale-110
             `}>
-                {/* LOGO WHATSAPP SVG */}
                 <svg 
                     className="w-6 h-6 md:w-7 md:h-7 fill-current transition-colors" 
                     viewBox="0 0 24 24"
@@ -66,7 +57,6 @@ export default function FloatingContact() {
                 </svg>
             </div>
         </Magnetic>
-
       </div>
     </a>
   )

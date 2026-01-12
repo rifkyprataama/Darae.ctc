@@ -16,7 +16,6 @@ export default function Snowfall() {
         let animationFrameId: number
         let snowflakes: any[] = []
 
-        // --- KONFIGURASI ---
         const particleCount = 60 
         
         // PENYESUAIAN PALET WARNA:
@@ -26,28 +25,25 @@ export default function Snowfall() {
             ? 'rgba(212, 175, 55, ' 
             : 'rgba(31, 35, 39, ' 
 
-        // Fungsi resize canvas
         const resizeCanvas = () => {
             canvas.width = window.innerWidth
             canvas.height = window.innerHeight
         }
 
-        // Membuat partikel
         const createSnowflakes = () => {
             snowflakes = []
             for (let i = 0; i < particleCount; i++) {
                 snowflakes.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    radius: Math.random() * 2 + 0.5, // Ukuran sedikit lebih kecil agar elegan
-                    speed: Math.random() * 0.5 + 0.2, // Kecepatan diperlambat (lebih calming)
+                    radius: Math.random() * 2 + 0.5,
+                    speed: Math.random() * 0.5 + 0.2,
                     drift: Math.random() * 1 - 0.5, 
-                    opacity: Math.random() * 0.4 + 0.1 // Opacity max 0.5 agar tidak mengganggu teks
+                    opacity: Math.random() * 0.4 + 0.1
                 })
             }
         }
 
-        // Loop Animasi
         const draw = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height)
             
@@ -57,17 +53,14 @@ export default function Snowfall() {
                 ctx.fillStyle = color + flake.opacity + ')' 
                 ctx.fill()
 
-                // Update posisi
                 flake.y += flake.speed
                 flake.x += flake.drift
 
-                // Reset jika keluar layar (bawah)
                 if (flake.y > canvas.height) {
                     flake.y = -5
                     flake.x = Math.random() * canvas.width
                 }
-                
-                // Reset jika keluar layar (samping)
+
                 if (flake.x > canvas.width) flake.x = 0
                 if (flake.x < 0) flake.x = canvas.width
             })
@@ -75,12 +68,10 @@ export default function Snowfall() {
             animationFrameId = requestAnimationFrame(draw)
         }
 
-        // Inisialisasi
         resizeCanvas()
         createSnowflakes()
         draw()
 
-        // Event Listener
         window.addEventListener('resize', () => {
             resizeCanvas()
             createSnowflakes()
@@ -90,7 +81,7 @@ export default function Snowfall() {
             window.removeEventListener('resize', resizeCanvas)
             cancelAnimationFrame(animationFrameId)
         }
-    }, [resolvedTheme]) // Re-run saat tema berubah
+    }, [resolvedTheme])
 
     return (
         <canvas

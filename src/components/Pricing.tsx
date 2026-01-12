@@ -10,7 +10,7 @@ export default function Pricing() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleWhatsAppOrder = (packageName: string, price: string) => {
-    const phoneNumber = "6281234567890"; 
+    const phoneNumber = "6282117088846"; 
     const message = `Halo Darae, saya tertarik dengan paket *${packageName}* dengan harga *${price}*. Boleh minta info detailnya?`;
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
@@ -21,27 +21,23 @@ export default function Pricing() {
       
       <ConsultationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
-      {/* Background Decor (Gold/Warm) */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] 
             bg-darae-gold/10 dark:bg-darae-accent/5 
             rounded-full blur-3xl -z-10 pointer-events-none">
       </div>
 
       <div className="max-w-6xl mx-auto">
-        
-        {/* 1. Header Section */}
         <ScrollReveal direction="up" delay={0.1} fullWidth>
             <div className="text-center mb-16 md:mb-24">
               <h2 className="text-4xl md:text-5xl font-bold mb-6 text-darae-charcoal dark:text-white tracking-tight">
                 Solusi Digital <br /> <span className="text-darae-accent">All-in-One</span>
               </h2>
               <p className="text-darae-charcoal/70 dark:text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
-                Dari pengembangan sistem IT hingga strategi kreatif visual. Pilih layanan yang spesifik untuk pertumbuhan bisnis Anda.
+                Dari pengembangan sistem IT hingga desain kreatif visual. Pilih layanan yang spesifik untuk pertumbuhan bisnis Anda.
               </p>
             </div>
         </ScrollReveal>
 
-        {/* 2. Pricing Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 gap-y-12 items-start">
           {pricingPackages.map((pkg, index) => (
             <ScrollReveal 
@@ -53,9 +49,7 @@ export default function Pricing() {
                 <div 
                   className={`relative flex flex-col p-8 md:p-10 rounded-[2.5rem] transition-all duration-300 group h-full
                     ${pkg.recommended 
-                      /* Recommended: Border Merah/Gold, Shadow Aksen */
                       ? 'bg-white dark:bg-[#1f2327] border-2 border-darae-accent shadow-2xl shadow-darae-accent/10 scale-100 lg:scale-105 z-10' 
-                      /* Normal: Border Halus */
                       : 'bg-white/60 dark:bg-[#1f2327]/60 border border-gray-100 dark:border-white/5 hover:border-darae-accent/30 hover:shadow-xl'
                     }
                   `}
@@ -68,12 +62,10 @@ export default function Pricing() {
 
                   <div className="flex items-center gap-2 mb-3">
                      {pkg.category === "IT Service" ? (
-                        /* Tag Dev: Biru Muted */
                         <span className="bg-darae-blue/20 text-darae-charcoal dark:text-darae-blue text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1">
                             <Code className="w-3 h-3" /> Dev
                         </span>
                      ) : (
-                        /* Tag Creative: Gold Muted */
                         <span className="bg-darae-gold/30 text-darae-charcoal dark:text-darae-gold text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1">
                             <Palette className="w-3 h-3" /> Creative
                         </span>
@@ -123,9 +115,7 @@ export default function Pricing() {
                       className={`
                         group/btn relative w-full block py-4 rounded-full font-bold text-center overflow-hidden transition-all duration-300 transform active:scale-95 cursor-pointer
                         ${pkg.recommended 
-                          /* Recommended Button */
                           ? 'bg-darae-accent text-white shadow-lg shadow-darae-accent/30' 
-                          /* Normal Button */
                           : 'bg-transparent border border-gray-200 dark:border-white/20 text-darae-charcoal dark:text-white'
                         }
                       `}
@@ -133,9 +123,7 @@ export default function Pricing() {
                       <div className={`
                         absolute inset-0 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-out
                         ${pkg.recommended
-                            /* Hover Rec: Hitam (Light) / Putih (Dark) */
                             ? 'bg-darae-charcoal dark:bg-white' 
-                            /* Hover Normal: Merah */
                             : 'bg-darae-accent'        
                         }
                       `}></div>
@@ -156,22 +144,19 @@ export default function Pricing() {
           ))}
         </div>
 
-        {/* 3. Footer Custom Order */}
         <ScrollReveal direction="up" delay={0.4} fullWidth>
             <div className="mt-24 w-full">
                 <div className="relative rounded-[2.5rem] bg-darae-charcoal/5 dark:bg-white/5 border border-darae-charcoal/10 dark:border-white/10 p-8 md:p-12 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10 transition-colors duration-500">
                     
-                    {/* Pattern Dot */}
                     <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" 
-                         style={{ backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)', backgroundSize: '24px 24px' }}>
+                      style={{ backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)', backgroundSize: '24px 24px' }}>
                     </div>
                     
-                    {/* Glow Corner (Gold/Accent) */}
                     <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-darae-gold/30 dark:bg-darae-accent/20 rounded-full blur-[80px] pointer-events-none"></div>
 
                     <div className="relative z-10 text-center md:text-left max-w-2xl">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-darae-accent/10 text-darae-accent text-xs font-bold uppercase tracking-wider mb-4">
-                            <Zap className="w-4 h-4" /> Enterprise & Custom
+                            <Zap className="w-4 h-4" /> Siap Memulai Project Anda?
                         </div>
                         
                         <h3 className="text-3xl md:text-4xl font-bold text-darae-charcoal dark:text-white mb-4">
@@ -179,7 +164,7 @@ export default function Pricing() {
                         </h3>
                         
                         <p className="text-darae-charcoal/70 dark:text-gray-400 text-base md:text-lg leading-relaxed">
-                            Kami paham setiap bisnis itu unik. Diskusikan project aplikasi kompleks, branding korporat, atau kontrak jangka panjang dengan tim kami.
+                            Kami paham setiap bisnis itu unik. Diskusikan project website, aplikasi kompleks, digital creative, atau yang lainnya dengan tim kami.
                         </p>
 
                         <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-3 mt-8">
@@ -202,7 +187,6 @@ export default function Pricing() {
                                 onClick={() => setIsModalOpen(true)}
                                 className="group/btn relative inline-flex items-center justify-center gap-3 bg-darae-charcoal dark:bg-darae-gold text-white dark:text-darae-charcoal font-bold py-5 px-10 rounded-full overflow-hidden transition-transform hover:shadow-2xl hover:shadow-darae-accent/20 active:scale-95 cursor-pointer"
                             >
-                                {/* Sliding Background Hover */}
                                 <div className="absolute inset-0 bg-darae-accent dark:bg-darae-blue translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-out"></div>
                                 
                                 <span className="relative z-10 group-hover/btn:text-white dark:group-hover/btn:text-white transition-colors">Konsultasi Project</span>
@@ -213,11 +197,9 @@ export default function Pricing() {
                             Respon cepat dalam 24 jam
                         </p>
                     </div>
-
                 </div>
             </div>
         </ScrollReveal>
-
       </div>
     </section>
   )

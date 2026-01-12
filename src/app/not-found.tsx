@@ -5,14 +5,11 @@ import Magnetic from '@/components/ui/Magnetic'
 export default function NotFound() {
   return (
     <div className="h-screen w-full flex flex-col items-center justify-center bg-transparent text-center px-4 relative overflow-hidden">
-      
-      {/* Background Glow (Disesuaikan Palet: Biru Muted / Merah Aksen) */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] 
             bg-darae-blue/20 dark:bg-darae-accent/10 
             rounded-full blur-[100px] -z-10 pointer-events-none">
       </div>
 
-      {/* Angka Besar (Watermark Style) */}
       <h1 className="text-[120px] md:text-[200px] font-black text-darae-charcoal/5 dark:text-white/5 leading-none select-none">
         404
       </h1>
@@ -25,7 +22,6 @@ export default function NotFound() {
           Sepertinya Anda tersesat di ruang digital. Halaman yang Anda cari tidak ditemukan atau telah dipindahkan.
         </p>
 
-        {/* Tombol Kembali ke Home (Style Konsisten) */}
         <div className="flex justify-center">
             <Magnetic>
                 <Link 
@@ -36,12 +32,10 @@ export default function NotFound() {
                     dark:bg-darae-gold dark:text-darae-charcoal
                     transition-transform active:scale-95"
                 >
-                    {/* Hover Overlay (Sliding Effect) */}
                     <div className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out
                         bg-darae-accent dark:bg-darae-blue">
                     </div>
 
-                    {/* Text Label */}
                     <span className="relative z-10 group-hover:text-white transition-colors duration-300">
                         Kembali ke Home
                     </span>

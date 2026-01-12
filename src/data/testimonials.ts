@@ -1,17 +1,15 @@
-// src/data/testimonials.ts
-
 export const testimonialsData = [
     {
       id: 1,
-      name: "Budi Prasetyo",
-      role: "Direktur, PT Maju",
+      name: "Fauzan",
+      role: "Owner Pixtretto",
       content: "Sangat profesional dan detail. Mereka paham kebutuhan bisnis kami dan memberikan solusi terbaik.",
-      project: "Company Profile"
+      project: "Desain Brosur"
     },
     {
       id: 2,
-      name: "Diana Putri",
-      role: "Marketing Mgr",
+      name: "Putri",
+      role: "Marketing",
       content: "Desain logo dan brand guideline yang dibuat sangat fresh. Brand kami jadi lebih dikenal pasar milenial.",
       project: "Branding"
     },

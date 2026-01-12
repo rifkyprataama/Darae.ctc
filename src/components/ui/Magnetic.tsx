@@ -33,8 +33,6 @@ export default function Magnetic({ children }: { children: React.ReactNode }) {
     const { x, y } = position
     return (
         <motion.div
-            // REVISI PENTING: Tambahkan display: "inline-block"
-            // Ini menjaga agar elemen tidak melebar memenuhi layar (block) yang bisa merusak Navbar
             style={{ position: "relative", display: "inline-block" }} 
             ref={ref}
             onMouseMove={handleMouse}

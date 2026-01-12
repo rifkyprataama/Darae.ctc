@@ -12,42 +12,38 @@ export default function FAQ() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null) 
     const [isModalOpen, setIsModalOpen] = useState(false)
     const { setIsHovered } = useCursor()
-
     const toggleFAQ = (index: number) => {
         setActiveIndex(activeIndex === index ? null : index)
     }
 
     return (
-        <section className="py-24 px-4 bg-transparent relative overflow-hidden transition-colors duration-500">
+        <section className="pt-32 pb-24 px-4 bg-transparent relative overflow-hidden transition-colors duration-500">
             
             <ConsultationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
             
             <div className="max-w-6xl mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-                    
-                    {/* BAGIAN KIRI (Sticky Box) */}
-                    <div className="lg:col-span-5 sticky top-24">
+                    <div className="lg:col-span-5 relative lg:sticky lg:top-32 order-2 lg:order-1">
                         <ScrollReveal direction="up" delay={0.1} fullWidth>
                             <div className="relative p-8 md:p-10 rounded-[2.5rem] 
                                 bg-white/50 dark:bg-[#1f2327]/50 backdrop-blur-md 
                                 border border-gray-200 dark:border-white/5 
                                 overflow-hidden transition-all duration-500 shadow-xl shadow-gray-200/20 dark:shadow-none">
-                                
-                                {/* Pattern Dot Background */}
+
                                 <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" 
                                     style={{ backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)', backgroundSize: '24px 24px' }}>
                                 </div>
                                 
                                 <div className="relative z-10">
                                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-darae-accent/10 text-darae-accent text-[10px] font-bold uppercase tracking-wider mb-6">
-                                        <Zap className="w-3 h-3" /> Enterprise & Custom
+                                        <Zap className="w-3 h-3" /> Siap Memulai Project Anda?
                                     </div>
 
                                     <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight text-darae-charcoal dark:text-white">
-                                        Punya Kebutuhan <span className="text-darae-accent">Spesifik?</span>
+                                        Bagaimana <span className="text-darae-accent">Sudah Yakin?</span>
                                     </h2>
                                     <p className="text-darae-charcoal/70 dark:text-gray-400 mb-8 leading-relaxed text-sm md:text-base">
-                                        Kami paham setiap bisnis itu unik. Diskusikan project aplikasi kompleks, branding korporat, atau kontrak jangka panjang dengan tim kami.
+                                        Kami paham setiap bisnis itu unik. Diskusikan project website, aplikasi kompleks, digital creative, atau yang lainnya.
                                     </p>
 
                                     <div className="flex flex-wrap gap-x-6 gap-y-3 mb-10">
@@ -62,7 +58,6 @@ export default function FAQ() {
                                         </div>
                                     </div>
 
-                                    {/* --- TOMBOL KONSULTASI --- */}
                                     <div className="w-full flex justify-center">
                                         <Magnetic>
                                             <button 
@@ -88,35 +83,32 @@ export default function FAQ() {
                                     <p className="text-center mt-4 text-[10px] text-gray-400 font-medium">
                                         Respon cepat dalam 24 jam
                                     </p>
-
                                 </div>
                             </div>
                         </ScrollReveal>
                     </div>
 
-                    {/* BAGIAN KANAN (FAQ LIST) */}
-                    <div className="lg:col-span-7 flex flex-col justify-center pt-4">
-                         
-                         {/* Header FAQ */}
-                         <ScrollReveal direction="up" delay={0.2} fullWidth>
-                             <div className="mb-10">
-                                <span className="text-darae-accent font-bold tracking-widest text-xs uppercase mb-2 block">FAQ</span>
-                                <h3 className="text-3xl md:text-4xl font-bold text-darae-charcoal dark:text-white">
+                    <div className="lg:col-span-7 flex flex-col justify-center order-1 lg:order-2">
+
+                        <ScrollReveal direction="up" fullWidth>
+                            <div className="mb-10 text-left">
+                                <span className="text-darae-accent font-bold tracking-widest text-xs uppercase mb-2 block">
+                                    FAQ
+                                </span>
+                                <h3 className="text-3xl md:text-5xl font-bold text-darae-charcoal dark:text-white">
                                     Pertanyaan Umum
                                 </h3>
-                             </div>
-                         </ScrollReveal>
+                            </div>
+                        </ScrollReveal>
 
-                         <div className="space-y-4">
+                        <div className="space-y-4">
                             {faqData.map((faq, index) => (
-                                <ScrollReveal key={index} delay={0.2 + (index * 0.1)} fullWidth>
+                                <ScrollReveal key={index} delay={0.1 + (index * 0.1)} fullWidth>
                                     <div 
                                         className={`
                                             rounded-2xl transition-all duration-300 border
                                             ${activeIndex === index 
-                                                /* ACTIVE STATE: */
                                                 ? 'bg-white dark:bg-[#1f2327] border-darae-accent dark:border-darae-gold shadow-lg shadow-darae-accent/5' 
-                                                /* INACTIVE STATE: */
                                                 : 'bg-transparent border-gray-200 dark:border-white/10 hover:border-darae-accent dark:hover:border-darae-gold dark:hover:bg-white/5'}
                                         `}
                                     >
@@ -155,9 +147,8 @@ export default function FAQ() {
                                     </div>
                                 </ScrollReveal>
                             ))}
-                         </div>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </section>
