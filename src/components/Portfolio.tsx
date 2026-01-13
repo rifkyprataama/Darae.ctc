@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowUpRight, Code, Palette, Layers, Monitor } from 'lucide-react'
+import { ArrowUpRight, Code, Palette, Layers, Monitor, ImageOff } from 'lucide-react'
 import Image from 'next/image'
 import ProjectModal from './ProjectModal'
 import Magnetic from './ui/Magnetic'
@@ -115,12 +115,20 @@ export default function Portfolio() {
                                         </div>
                                     )}
 
-                                    <Image 
-                                        src={project.image} 
-                                        alt={project.title} 
-                                        fill
-                                        className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                    />
+                                    {/* LOGIKA PERBAIKAN ERROR: */}
+                                    {project.image ? (
+                                        <Image 
+                                            src={project.image} 
+                                            alt={project.title} 
+                                            fill
+                                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
+                                    ) : (
+                                        <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400">
+                                            <ImageOff className="w-12 h-12 mb-2 opacity-20" />
+                                            <span className="text-xs font-mono opacity-50">No Preview</span>
+                                        </div>
+                                    )}
                                     
                                     {/* Overlay dengan MAGNETIC BUTTON */}
                                     <div className="absolute inset-0 bg-darae-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
