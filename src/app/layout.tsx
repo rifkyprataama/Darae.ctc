@@ -16,9 +16,9 @@ export const metadata: Metadata = {
   title: "Darae | Jasa IT & Digital Creative",
   description: "Solusi digital all-in-one: Pembuatan Website, Aplikasi Mobile, Video Editing, dan Desain Grafis.",
   openGraph: {
-    title: "Darae | Transformasi Digital Bisnis Anda",
-    description: "Jasa pembuatan Website, Aplikasi, & Branding terpercaya.",
-    url: 'https://darae.id', 
+    title: "Darae | Jasa IT & Digital Creative, Transformasi Digital Bisnis Anda",
+    description: "Solusi digital all-in-one: Pembuatan Website, Aplikasi Mobile, Video Editing, dan Desain Grafis.",
+    url: 'https://daraectc.com',
     siteName: 'Darae Creative',
     images: [
       {
