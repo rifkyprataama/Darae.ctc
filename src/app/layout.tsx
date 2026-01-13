@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     siteName: 'Darae Creative',
     images: [
       {
-        url: '/og-image.png', 
+        url: '/og-image.jpeg',
         width: 1200,
         height: 630,
         alt: 'Darae Creative Banner',
