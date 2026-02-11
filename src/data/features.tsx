@@ -10,7 +10,7 @@ export const techStackData = [
     { name: "JavaScript", icon: "https://cdn.simpleicons.org/javascript/F7DF1E", invert: false },
     { name: "Node.js", icon: "https://cdn.simpleicons.org/nodedotjs/339933", invert: false },
     { name: "Supabase", icon: "https://cdn.simpleicons.org/supabase/3ECF8E", invert: false },
-    { name: "Canva", icon: "https://cdn.simpleicons.org/canva/00C4CC", invert: false },
+    { name: "Canva", icon: "/icons/canva.svg", invert: false },
     { name: "Figma", icon: "https://cdn.simpleicons.org/figma/F24E1E", invert: false },
 ];
 
