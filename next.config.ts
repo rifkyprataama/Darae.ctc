@@ -20,6 +20,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'upload.wikimedia.org', // TAMBAHKAN INI
       },
+      {
+        protocol: 'https',
+        hostname: 'udhadcttplnmziifumit.supabase.co', 
+      },
       // randomuser.me SUDAH DIHAPUS
     ],
   },
