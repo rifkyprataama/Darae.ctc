@@ -1,13 +1,34 @@
 'use client'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Magnetic from "./ui/Magnetic";
 import ConsultationModal from "./ConsultationModal"; 
-import { Check, Star, Code, Palette, Zap, Clock, ShieldCheck, Users, ArrowRight } from "lucide-react";
-import { pricingPackages } from "@/data/pricing";
+import { Check, Star, Code, Palette, Zap, Clock, ShieldCheck, Users, ArrowRight, Loader2 } from "lucide-react";
 import ScrollReveal from "./ui/ScrollReveal";
+import { supabase } from '@/lib/supabaseClient'; // PENTING: Import Supabase Client
 
 export default function Pricing() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  // STATE BARU: Menyimpan data dari database
+  const [packages, setPackages] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // FETCH DATA DARI DATABASE
+  useEffect(() => {
+    const fetchPricing = async () => {
+      const { data, error } = await supabase
+        .from('pricing')
+        .select('*')
+        .order('id', { ascending: true }); // Urutkan sesuai ID agar rapi
+      
+      if (data) setPackages(data);
+      if (error) console.error("Error fetching pricing:", error);
+      
+      setLoading(false);
+    };
+
+    fetchPricing();
+  }, []);
 
   const handleWhatsAppOrder = (packageName: string, price: string) => {
     const phoneNumber = "6282117088846"; 
@@ -38,113 +59,123 @@ export default function Pricing() {
             </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 gap-y-12 items-start">
-          {pricingPackages.map((pkg, index) => (
-            <ScrollReveal 
-                key={index} 
-                delay={index * 0.2} 
-                fullWidth 
-                className="h-full" 
-            >
-                <div 
-                  className={`relative flex flex-col p-8 md:p-10 rounded-[2.5rem] transition-all duration-300 group h-full
-                    ${pkg.recommended 
-                      ? 'bg-white dark:bg-[#1f2327] border-2 border-darae-accent shadow-2xl shadow-darae-accent/10 scale-100 lg:scale-105 z-10' 
-                      : 'bg-white/60 dark:bg-[#1f2327]/60 border border-gray-100 dark:border-white/5 hover:border-darae-accent/30 hover:shadow-xl'
-                    }
-                  `}
+        {/* LOGIKA LOADING */}
+        {loading ? (
+            <div className="flex justify-center items-center py-20">
+                <Loader2 className="w-10 h-10 animate-spin text-darae-accent" />
+            </div>
+        ) : (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 gap-y-12 items-start">
+            {/* RENDER DATA DARI DATABASE (packages) */}
+            {packages.map((pkg, index) => (
+                <ScrollReveal 
+                    key={pkg.id} 
+                    delay={index * 0.2} 
+                    fullWidth 
+                    className="h-full" 
                 >
-                  {pkg.recommended && (
-                    <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-darae-accent text-white px-6 py-2 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg shadow-darae-accent/30 tracking-wide z-20 whitespace-nowrap">
-                      <Star className="w-4 h-4 fill-current" /> RECOMMENDED
-                    </div>
-                  )}
-
-                  <div className="flex items-center gap-2 mb-3">
-                     {pkg.category === "IT Service" ? (
-                        <span className="bg-darae-blue/20 text-darae-charcoal dark:text-darae-blue text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1">
-                            <Code className="w-3 h-3" /> Dev
-                        </span>
-                     ) : (
-                        <span className="bg-darae-gold/30 text-darae-charcoal dark:text-darae-gold text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1">
-                            <Palette className="w-3 h-3" /> Creative
-                        </span>
-                     )}
-                  </div>
-
-                  <div className="mb-6">
-                    <h3 className="text-2xl font-bold text-darae-charcoal dark:text-white mb-3">
-                      {pkg.title}
-                    </h3>
-                    <p className="text-sm text-darae-charcoal/60 dark:text-gray-400 leading-relaxed min-h-[48px]">
-                      {pkg.description}
-                    </p>
-                  </div>
-
-                  <div className="mb-8 border-b border-gray-100 dark:border-white/10 pb-8">
-                    <div className="flex items-baseline gap-1">
-                      <span className="text-lg font-bold text-darae-charcoal/60 dark:text-gray-500">Rp</span>
-                      <span className="text-4xl md:text-5xl font-extrabold text-darae-charcoal dark:text-white tracking-tighter">
-                        {pkg.price}
-                      </span>
-                    </div>
-                    <span className="text-sm text-darae-charcoal/50 dark:text-gray-500 font-medium mt-1 block">
-                      {pkg.period}
-                    </span>
-                  </div>
-
-                  <ul className="space-y-4 mb-10 flex-1">
-                    {pkg.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-sm font-medium text-darae-charcoal/80 dark:text-gray-300">
-                        <div className={`mt-0.5 min-w-[20px] h-5 rounded-full flex items-center justify-center 
-                          ${pkg.recommended 
-                            ? 'bg-darae-accent text-white shadow-md shadow-darae-accent/20' 
-                            : 'bg-darae-accent/10 text-darae-accent'
-                          }
-                        `}>
-                          <Check className="w-3 h-3" strokeWidth={3} />
-                        </div>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Magnetic>
-                    <button 
-                      onClick={() => handleWhatsAppOrder(pkg.title, pkg.price)}
-                      className={`
-                        group/btn relative w-full block py-4 rounded-full font-bold text-center overflow-hidden transition-all duration-300 transform active:scale-95 cursor-pointer
-                        ${pkg.recommended 
-                          ? 'bg-darae-accent text-white shadow-lg shadow-darae-accent/30' 
-                          : 'bg-transparent border border-gray-200 dark:border-white/20 text-darae-charcoal dark:text-white'
+                    <div 
+                    className={`relative flex flex-col p-8 md:p-10 rounded-[2.5rem] transition-all duration-300 group h-full
+                        ${pkg.is_recommended // Perhatikan: di DB namanya is_recommended (snake_case)
+                        ? 'bg-white dark:bg-[#1f2327] border-2 border-darae-accent shadow-2xl shadow-darae-accent/10 scale-100 lg:scale-105 z-10' 
+                        : 'bg-white/60 dark:bg-[#1f2327]/60 border border-gray-100 dark:border-white/5 hover:border-darae-accent/30 hover:shadow-xl'
                         }
-                      `}
+                    `}
                     >
-                      <div className={`
-                        absolute inset-0 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-out
-                        ${pkg.recommended
-                            ? 'bg-darae-charcoal dark:bg-white' 
-                            : 'bg-darae-accent'        
-                        }
-                      `}></div>
+                    {pkg.is_recommended && (
+                        <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-darae-accent text-white px-6 py-2 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg shadow-darae-accent/30 tracking-wide z-20 whitespace-nowrap">
+                        <Star className="w-4 h-4 fill-current" /> RECOMMENDED
+                        </div>
+                    )}
 
-                      <span className={`
-                        relative z-10 transition-colors duration-300
-                        ${pkg.recommended
-                            ? 'group-hover/btn:text-white dark:group-hover/btn:text-black' 
-                            : 'group-hover/btn:text-white'
-                        }
-                      `}>
-                        Pilih Paket
-                      </span>
-                    </button>
-                  </Magnetic>
-                </div>
-            </ScrollReveal>
-          ))}
-        </div>
+                    <div className="flex items-center gap-2 mb-3">
+                        {pkg.category === "IT Service" ? (
+                            <span className="bg-darae-blue/20 text-darae-charcoal dark:text-darae-blue text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1">
+                                <Code className="w-3 h-3" /> Dev
+                            </span>
+                        ) : (
+                            <span className="bg-darae-gold/30 text-darae-charcoal dark:text-darae-gold text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1">
+                                <Palette className="w-3 h-3" /> Creative
+                            </span>
+                        )}
+                    </div>
+
+                    <div className="mb-6">
+                        <h3 className="text-2xl font-bold text-darae-charcoal dark:text-white mb-3">
+                        {pkg.title}
+                        </h3>
+                        <p className="text-sm text-darae-charcoal/60 dark:text-gray-400 leading-relaxed min-h-[48px]">
+                        {pkg.description}
+                        </p>
+                    </div>
+
+                    <div className="mb-8 border-b border-gray-100 dark:border-white/10 pb-8">
+                        <div className="flex items-baseline gap-1">
+                        <span className="text-lg font-bold text-darae-charcoal/60 dark:text-gray-500">Rp</span>
+                        <span className="text-4xl md:text-5xl font-extrabold text-darae-charcoal dark:text-white tracking-tighter">
+                            {pkg.price}
+                        </span>
+                        </div>
+                        <span className="text-sm text-darae-charcoal/50 dark:text-gray-500 font-medium mt-1 block">
+                        {pkg.period}
+                        </span>
+                    </div>
+
+                    <ul className="space-y-4 mb-10 flex-1">
+                        {/* Features di DB disimpan sebagai Array Text */}
+                        {pkg.features?.map((feature: string, idx: number) => (
+                        <li key={idx} className="flex items-start gap-3 text-sm font-medium text-darae-charcoal/80 dark:text-gray-300">
+                            <div className={`mt-0.5 min-w-[20px] h-5 rounded-full flex items-center justify-center 
+                            ${pkg.is_recommended 
+                                ? 'bg-darae-accent text-white shadow-md shadow-darae-accent/20' 
+                                : 'bg-darae-accent/10 text-darae-accent'
+                            }
+                            `}>
+                            <Check className="w-3 h-3" strokeWidth={3} />
+                            </div>
+                            <span>{feature}</span>
+                        </li>
+                        ))}
+                    </ul>
+
+                    <Magnetic>
+                        <button 
+                        onClick={() => handleWhatsAppOrder(pkg.title, pkg.price)}
+                        className={`
+                            group/btn relative w-full block py-4 rounded-full font-bold text-center overflow-hidden transition-all duration-300 transform active:scale-95 cursor-pointer
+                            ${pkg.is_recommended 
+                            ? 'bg-darae-accent text-white shadow-lg shadow-darae-accent/30' 
+                            : 'bg-transparent border border-gray-200 dark:border-white/20 text-darae-charcoal dark:text-white'
+                            }
+                        `}
+                        >
+                        <div className={`
+                            absolute inset-0 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-out
+                            ${pkg.is_recommended
+                                ? 'bg-darae-charcoal dark:bg-white' 
+                                : 'bg-darae-accent'        
+                            }
+                        `}></div>
+
+                        <span className={`
+                            relative z-10 transition-colors duration-300
+                            ${pkg.is_recommended
+                                ? 'group-hover/btn:text-white dark:group-hover/btn:text-black' 
+                                : 'group-hover/btn:text-white'
+                            }
+                        `}>
+                            Pilih Paket
+                        </span>
+                        </button>
+                    </Magnetic>
+                    </div>
+                </ScrollReveal>
+            ))}
+            </div>
+        )}
 
         <ScrollReveal direction="up" delay={0.4} fullWidth>
+            {/* Bagian Bawah "Custom Project" tetap sama */}
             <div className="mt-24 w-full">
                 <div className="relative rounded-[2.5rem] bg-darae-charcoal/5 dark:bg-white/5 border border-darae-charcoal/10 dark:border-white/10 p-8 md:p-12 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10 transition-colors duration-500">
                     
